@@ -10,5 +10,6 @@
 
 void prompt(void);
 char *input_read(void);
+char **get_tokens(char *input);
 
 #endif

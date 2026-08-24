@@ -15,6 +15,7 @@ int main(int argc, char *argv[], char *env[])
 	char *input;
 	char **in_argv;
 	int run = 1;
+	int status;
 
 	while (run == 1)
 	{
