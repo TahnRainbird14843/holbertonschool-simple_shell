@@ -11,4 +11,7 @@ Program is a simple command line interpreter. Executing commans read from stnada
 .SH BUILD
 Developed using C programming language.
 
+.SH INTERACTIVE MODE
 
+
+.SH NON-INTERACTIVE MODE
