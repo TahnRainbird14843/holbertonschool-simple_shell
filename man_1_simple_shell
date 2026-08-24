@@ -1,0 +1,14 @@
+.TH hsh
+
+.SH NAME
+.B hsh
+hsh - simple UNIX command interpreter
+
+.SH DESCRIPTION
+.B hsh
+Program is a simple command line interpreter. Executing commans read from stnadard input. Program mimics behaviour of .B/bin/sh for basic command execution.
+
+.SH BUILD
+Developed using C programming language.
+
+
