@@ -27,8 +27,9 @@ The following files are included in this project:
 | [man\_1\_simple\_shell](./man_1_simple_shell) | Manual file                                  |
 | [AUTHORS](./AUTHORS)                          | File listing all Authors                     |
 | [shell.h](./shell.h)                          | Header file containing prototypes and macros |
+| [prompt.c](./prompt.c)                        | Displays shell prompt only when running in interactive mode. |
 |                                               |                                              |
-|                                               |                                              |
+
 ## Compile ⚙️
 
 Compile program with:
