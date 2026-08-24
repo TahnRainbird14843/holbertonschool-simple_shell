@@ -28,7 +28,8 @@ The following files are included in this project:
 | [AUTHORS](./AUTHORS)                          | File listing all Authors                     |
 | [shell.h](./shell.h)                          | Header file containing prototypes and macros |
 | [prompt.c](./prompt.c)                        | Displays shell prompt only when running in interactive mode. |
-|                                               |                                              |
+| [main.c](./main.c)                            | Main loop of shell |
+|                                               |                       |
 
 ## Compile ⚙️
 
