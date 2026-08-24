@@ -2,6 +2,9 @@
 
 /**
  * main - entry point
+ * argc: argument count
+ * argv: list of args
+ * env: list of env args
  *
  * Return: 0 always
  */
@@ -10,28 +13,18 @@ int main(int argc, char *argv[], char *env[])
 	pid_t curr_pid;
 	pid_t child_pid;
 	char *input;
-	ssize_t in_len;
-	size_t size = 128;
-	char *in_argv[10];
-	int i = 0;
-	FILE *in_stream = stdin;
-	int status;
+	char **in_argv;
 	int run = 1;
 
 	while (run == 1)
 	{
-		printf("#Shell$ ");
+		prompt();
 
-		in_len = getline(&input, &size, in_stream);
+		input = input_read();
 
-		in_argv[i] = strtok(input, " ");
-		while (argv[i] != NULL)
-		{
-			i++;
-			in_argv[i] = strtok(NULL, " ");
-		}
+		in_argv = get_tokens(input);
 
-		if (strcmp("exit", argv[0]) == 0)
+		if (strcmp("exit", in_argv[0]) == 0)
 		{
 			run = 0;
 			break;
