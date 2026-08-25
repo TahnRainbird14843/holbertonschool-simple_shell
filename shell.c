@@ -16,6 +16,7 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 	char **in_argv;
 	int run = 1;
 	int status;
+	void (*exec)(char **, char **);
 
 	while (run == 1)
 	{
@@ -25,22 +26,23 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 
 		in_argv = get_tokens(input);
 
-		if (strcmp("exit", in_argv[0]) == 0)
-		{
-			run = 0;
-			break;
-		}
+		check_exit(in_argv, &run);
 
-		child_pid = fork();
-		/*curr_pid = getpid();*/
-		if (child_pid == 0)
+		exec = command_func(in_argv[0]);
+
+		if (exec != NULL)
 		{
-			execve(in_argv[0], in_argv, env);
-		}
-		else
-		{
-			wait(&status);
-			printf("Success!\n");
+			child_pid = fork();
+			/*curr_pid = getpid();*/
+			if (child_pid == 0)
+			{
+				exec(in_argv, env);
+			}
+			else
+			{
+				wait(&status);
+				printf("Success!\n");
+			}
 		}
 	}
 	
