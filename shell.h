@@ -9,6 +9,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+typedef struct commands {
+	char *cmd;
+	void (*func)(char **, char **);
+} cmd_t;
+
 void prompt(void);
 char *input_read(void);
 char **get_tokens(char *input);
@@ -17,7 +22,9 @@ char *_getline(char **buffer, size_t *size, FILE *stream);
 char *_strtok(char *input, char *sep);
 char *get_path(char *command);
 int execute(char **args);
-char *_getline(char **buffer, size_t *size, FILE *stream);
-char *_strtok(char *input, char *sep);
+void (*command_func(char *cmd))(char **, char **);
+void exec_ls(char **args, char **env);
+void exec_env(char **args, char **env);
+void check_exit(char **args, int *run);
 
 #endif
