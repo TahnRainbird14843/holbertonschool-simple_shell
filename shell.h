@@ -17,5 +17,7 @@ char *_getline(char **buffer, size_t *size, FILE *stream);
 char *_strtok(char *input, char *sep);
 char *get_path(char *command);
 int execute(char **args);
+char *_getline(char **buffer, size_t *size, FILE *stream);
+char *_strtok(char *input, char *sep);
 
 #endif
