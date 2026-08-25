@@ -10,7 +10,7 @@ void prompt(void) /* Interactive mode prompt */
 {
 	if (isatty(STDIN_FILENO)) /* Checks standard input is from terminal */
 	{
-		printf("#Shell$ ");
+		printf("$ ");
 		fflush(stdout);
 	}
 }
