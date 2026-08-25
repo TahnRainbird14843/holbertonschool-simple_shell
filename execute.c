@@ -13,6 +13,7 @@ int execute(char **args)
 {
 	char *full_path;
 	pid_t pid;
+	char **e;
 
 	if (!args[0])
 		return 1;
@@ -22,7 +23,7 @@ int execute(char **args)
 
 	if (strcmp(args[0], "env") == 0)
 	{
-		for (char **e = environ; *e; e++)
+		for (e = environ; *e; e++)
 			printf("%s\n", *e);
 		return 1;
 	}

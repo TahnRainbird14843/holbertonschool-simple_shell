@@ -3,7 +3,7 @@
 char *_getline(char **input, size_t *size, FILE *stream)
 {
 	char *str = *input;
-	size_t chars;
+	ssize_t chars;
 
 	if (!str)
 		return (NULL);
