@@ -10,7 +10,7 @@
  */
 int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[], char *env[])
 {
-	pid_t curr_pid;
+	/*pid_t curr_pid;*/
 	pid_t child_pid;
 	char *input;
 	char **in_argv;
@@ -32,7 +32,7 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 		}
 
 		child_pid = fork();
-		curr_pid = getpid();
+		/*curr_pid = getpid();*/
 		if (child_pid == 0)
 		{
 			execve(in_argv[0], in_argv, env);
