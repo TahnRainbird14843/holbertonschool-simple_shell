@@ -1,5 +1,7 @@
 #include "shell.h"
 
+extern char **environ;
+
 /**
  * execute - command run from forking & calling execve
  * @args: array tokens
@@ -10,7 +12,7 @@
 int execute(char **args)
 {
 	char *full_path;
-	pid t pid;
+	pid_t pid;
 
 	if (!args[0])
 		return 1;
@@ -20,7 +22,7 @@ int execute(char **args)
 
 	if (strcmp(args[0], "env") == 0)
 	{
-		for (char **e = enciron; *e; e++)
+		for (char **e = environ; *e; e++)
 			printf("%s\n", *e);
 		return 1;
 	}
@@ -34,7 +36,7 @@ int execute(char **args)
 		if (full_path)
 			execve(full_path, args, environ);
 
-		printf("s: path not found\n", args[0]);
+		printf("%s: path not found\n", args[0]);
 		exit(1);
 	}
 

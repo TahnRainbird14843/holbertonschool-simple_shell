@@ -7,9 +7,11 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
 void prompt(void);
 char *input_read(void);
 char **get_tokens(char *input);
+char *get_path(char *command);
 
 #endif
