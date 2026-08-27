@@ -1,22 +1,21 @@
 #include "shell.h"
 
-char *_getline(char **input, size_t *size, FILE *stream)
+ssize_t _getline(char **input, size_t *size, FILE *stream)
 {
-	char *str = *input;
 	ssize_t chars;
 
-	if (!str)
-		return (NULL);
+	if (!*input)
+		return (-1);
 
-	chars = read(fileno(stream), str, *size);
+	chars = read(fileno(stream), *input, *size);
 
 	if (chars == -1)
-		return (NULL);
+		return (-1);
 
-	if (str[chars - 1] == '\n')
-		str[chars - 1] = '\0';
+	if (*input[chars - 1] == '\n')
+		*input[chars - 1] = '\0';
 
-	return (str);
+	return (chars);
 }
 
 char *_strtok(char *input, char *sep)
