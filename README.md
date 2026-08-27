@@ -1,4 +1,4 @@
-# C - Simple Shell 🐚
+# C - Simple Shell 🐚                  <img src="https://holbertonschool.com.au/wp-content/uploads/2023/02/Holberton-School.png">                      
 
 This project is an implementation of a simple UNIX command interpreter, created as part of the Holberton School curriculum. 
 
@@ -27,9 +27,15 @@ The following files are included in this project:
 | [man\_1\_simple\_shell](./man_1_simple_shell) | Manual file                                  |
 | [AUTHORS](./AUTHORS)                          | File listing all Authors                     |
 | [shell.h](./shell.h)                          | Header file containing prototypes and macros |
-| [prompt.c](./prompt.c)                        | Displays shell prompt only when running in interactive mode. |
-| [main.c](./main.c)                            | Main loop of shell |
-|                                               |                       |
+| [prompt.c](./prompt.c)      | Displays shell prompt only when running in interactive mode. |
+| [main.c](./main.c)                            | Main loop of shell                            |
+| [execute.c](./execute.c)                      |                                               |
+| [exit.c](./exit.c)                            |                                               |
+| [get\_path.c](./get_path.c)                   |                                               |
+| [get\_tokens.c](./get_tokens.c)               |                                               |
+| [input\_read.c](./input_read.c)               |                                               |
+| [builtins.c](./builtin.c)                     |                                               |
+| [custom\_funcs.c](./custom_funcs.c)           |                                               |
 
 ## Compile ⚙️
 
