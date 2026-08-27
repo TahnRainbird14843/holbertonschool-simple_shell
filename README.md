@@ -1,4 +1,4 @@
-<img src="https://holbertonschool.com.au/wp-content/uplloads/2023/02/Holberton-School.png"> 
+<img src="https://holbertonschool.com.au/wp-content/uploads/2023/02/Holberton-School.png">
 
 # C - Simple Shell 🐚                 
 This project is an implementation of a simple UNIX command interpreter, created as part of the Holberton School curriculum. 
