@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * main - entry point dimple shell
+ *
+ * Return: 0
+ */
+
 int main(void)
 {
 	char *input, **args;
@@ -9,7 +15,7 @@ int main(void)
 	{
 		prompt();
 		input = input_read();
-		if(!input)
+		if (!input)
 			break;
 
 		args = get_tokens(input);

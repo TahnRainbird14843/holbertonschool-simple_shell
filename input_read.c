@@ -19,8 +19,8 @@ char *input_read(void)
 		return (NULL);
 	}
 
-	if (input[l -1] == '\n')
+	if (input[l - 1] == '\n')
 		input[l - 1] = '\0';
-	
+
 	return (input);
 }

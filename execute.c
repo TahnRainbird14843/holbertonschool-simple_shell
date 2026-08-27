@@ -1,7 +1,5 @@
 #include "shell.h"
 
-extern char **environ;
-
 /**
  * execute - command run from forking & calling execve
  * @args: array tokens
@@ -16,16 +14,16 @@ int execute(char **args)
 	char **e;
 
 	if (!args[0])
-		return 1;
+		return (1);
 
 	if (strcmp(args[0], "exit") == 0)
-		return 0;
+		return (0);
 
 	if (strcmp(args[0], "env") == 0)
 	{
 		for (e = environ; *e; e++)
 			printf("%s\n", *e);
-		return 1;
+		return (1);
 	}
 
 	full_path = get_path(args[0]);
@@ -43,5 +41,5 @@ int execute(char **args)
 
 	wait(NULL);
 	free(full_path);
-	return 1;
+	return (1);
 }

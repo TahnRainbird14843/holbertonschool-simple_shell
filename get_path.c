@@ -15,11 +15,11 @@ char *get_path(char *command)
 	struct stat st;
 
 	if (!path)
-		return NULL;
+		return (NULL);
 
 	p_copy = strdup(path);
 	if (!p_copy)
-		return NULL;
+		return (NULL);
 
 	dire = strtok(p_copy, ":");
 
@@ -33,7 +33,7 @@ char *get_path(char *command)
 		if (stat(full_path, &st) == 0)
 		{
 			free(p_copy);
-			return strdup(full_path);
+			return (strdup(full_path));
 		}
 
 		dire = strtok(NULL, ":");
@@ -41,5 +41,5 @@ char *get_path(char *command)
 
 	free(p_copy);
 
-	return NULL;
+	return (NULL);
 }

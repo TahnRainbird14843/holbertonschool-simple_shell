@@ -2,8 +2,9 @@
 
 /**
  * get_tokens - command line split into aarray of tokens
+ * @input: string to token
  *
- * Return: 
+ * Return: pointer to array of token string otherwise NULL
  */
 
 char **get_tokens(char *input)
@@ -14,7 +15,7 @@ char **get_tokens(char *input)
 	tokens = malloc(sizeof(char *) * buffsize);
 
 	if (!tokens)
-		return NULL;
+		return (NULL);
 
 	t = strtok(input, " \t\r\n");
 	while (t)
@@ -27,12 +28,12 @@ char **get_tokens(char *input)
 			tokens = realloc(tokens, sizeof(char *) * buffsize);
 
 			if (!tokens)
-				return NULL;
+				return (NULL);
 		}
 
 		t = strtok(NULL, " \t\r\n");
 	}
 
 	tokens[i] = NULL;
-	return tokens;
+	return (tokens);
 }
