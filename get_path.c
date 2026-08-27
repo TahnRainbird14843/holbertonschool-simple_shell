@@ -12,7 +12,6 @@ char *get_path(char *command)
 	char full_path[1024];
 	char *p_copy, *dire;
 	char *path = getenv("PATH");
-	struct stat st;
 
 	if (!path)
 		return (NULL);
@@ -20,6 +19,12 @@ char *get_path(char *command)
 	p_copy = strdup(path);
 	if (!p_copy)
 		return (NULL);
+
+	if (access(command, X_OK) == 0)
+	{
+		free(p_copy);
+		return (strdup(command));
+	}
 
 	dire = strtok(p_copy, ":");
 
@@ -30,7 +35,7 @@ char *get_path(char *command)
 		strcat(full_path, "/");
 		strcat(full_path, command);
 
-		if (stat(full_path, &st) == 0)
+		if (access(full_path, X_OK) == 0)
 		{
 			free(p_copy);
 			return (strdup(full_path));

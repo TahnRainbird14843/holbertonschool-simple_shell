@@ -26,7 +26,7 @@ void prompt(void);
 char *input_read(void);
 char **get_tokens(char *input);
 char *get_path(char *command);
-char *_getline(char **buffer, size_t *size, FILE *stream);
+ssize_t _getline(char **buffer, size_t *size, FILE *stream);
 char *_strtok(char *input, char *sep);
 char *get_path(char *command);
 int execute(char **args);
@@ -34,5 +34,6 @@ void (*command_func(char *cmd))(char **, char **);
 void exec_ls(char **args, char **env);
 void exec_env(char **args, char **env);
 void check_exit(char **args, int *run);
+void sig_handle(int);
 
 #endif
