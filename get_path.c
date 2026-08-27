@@ -14,11 +14,11 @@ char *get_path(char *command)
 	char *path = getenv("PATH");
 
 	if (!path)
-		return NULL;
+		return (NULL);
 
 	p_copy = strdup(path);
 	if (!p_copy)
-		return NULL;
+		return (NULL);
 
 	if (access(command, X_OK) == 0)
 	{
@@ -38,7 +38,7 @@ char *get_path(char *command)
 		if (access(full_path, X_OK) == 0)
 		{
 			free(p_copy);
-			return strdup(full_path);
+			return (strdup(full_path));
 		}
 
 		dire = strtok(NULL, ":");
@@ -46,5 +46,5 @@ char *get_path(char *command)
 
 	free(p_copy);
 
-	return NULL;
+	return (NULL);
 }

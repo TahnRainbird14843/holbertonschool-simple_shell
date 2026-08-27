@@ -1,5 +1,14 @@
 #include "shell.h"
 
+/**
+ * _getline - getline implementation using read()
+ * @input: pointer to buffer for data store
+ * @size: size buffer
+ * @stream: input stream to read
+ *
+ * Return: Pointer to buffer otherwise NULL
+ */
+
 ssize_t _getline(char **input, size_t *size, FILE *stream)
 {
 	ssize_t chars;
@@ -17,6 +26,14 @@ ssize_t _getline(char **input, size_t *size, FILE *stream)
 
 	return (chars);
 }
+
+/**
+ * _strtok - string token using static buffer
+ * @input: string to token
+ * @sep: seperator string 1st char
+ *
+ * Return: Pointer to allocated token otherwise NULL
+ */
 
 char *_strtok(char *input, char *sep)
 {
@@ -40,7 +57,7 @@ char *_strtok(char *input, char *sep)
 		copy = NULL;
 		return (tok);
 	}
-	
+
 	copy = copy + i + 1;
 	return (tok);
 }

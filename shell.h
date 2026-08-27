@@ -9,11 +9,19 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-typedef struct commands {
+/**
+ * struct commands - map command name to handler func
+ * @cmd: coommand string
+ * @func: pointer to function executing command
+ */
+
+typedef struct commands
+{
 	char *cmd;
 	void (*func)(char **, char **);
 } cmd_t;
 
+extern char **environ;
 void prompt(void);
 char *input_read(void);
 char **get_tokens(char *input);

@@ -22,7 +22,7 @@ char *input_read(void)
 
 	if (input[l - 1] == '\n')
 		input[l - 1] = '\0';
-	
+
 	return (input);
 }
 

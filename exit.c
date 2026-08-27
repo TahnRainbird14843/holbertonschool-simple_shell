@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * check_exit - handles exit builtin
+ * @args: array of cmd arguments
+ * @run: pointer to shell loop flag
+ *
+ */
+
 void check_exit(char **args, int *run)
 {
 	int exit_code;
