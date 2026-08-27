@@ -7,8 +7,14 @@ void check_exit(char **args, int *run)
 	if (strcmp(args[0], "exit") == 0)
 	{
 		if (args[1])
-			exit(atoi(args[1]));
+		{
+			exit_code = atoi(args[1]);
+			exit(exit_code);
+		}
+
 		else
+		{
 			*run = 0;
+		}
 	}
 }
