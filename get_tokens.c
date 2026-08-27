@@ -1,13 +1,37 @@
 #include "shell.h"
 
+/**
+ * get_tokens - command line split into aarray of tokens
+ *
+ * Return: 
+ */
+
 char **get_tokens(char *input)
 {
-	char **tokens = malloc(sizeof(char *) * 64);
-	int i = 0;
-	char *token;
+	int i = 0, buffsize = 10;
+	char **tokens, *t;
 
-	for (token = _strtok(input, " "); token; token = _strtok(NULL, " "))
-		tokens[i++] = token;
+	tokens = malloc(sizeof(char *) * buffsize);
+
+	if (!tokens)
+		return NULL;
+
+	t = strtok(input, " \t\r\n");
+	while (t)
+	{
+		tokens[i++] = t;
+
+		if (i >= buffsize)
+		{
+			buffsize *= 2;
+			tokens = realloc(tokens, sizeof(char *) * buffsize);
+
+			if (!tokens)
+				return NULL;
+		}
+
+		t = strtok(NULL, " \t\r\n");
+	}
 
 	tokens[i] = NULL;
 	return tokens;
