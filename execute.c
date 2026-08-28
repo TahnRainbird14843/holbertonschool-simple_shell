@@ -12,19 +12,29 @@ int execute(char **args, char **env)
 	char *full_path;
 	pid_t pid;
 	char **e;
+	int (*builtin)(char **, char **);
 
 	if (!args[0])
 		return (1);
 
 	full_path = get_path(args[0]);
+	builtin = get_builtin(args[0]);
 
-	pid = fork();
-
-	if (pid == 0)
+	if (full_path)
 	{
-		if (full_path)
-			execve(full_path, args, env);
+		pid = fork();
 
+		if (pid == 0)
+		{
+			execve(full_path, args, env);
+		}
+	}
+	else if (builtin)
+	{
+		builtin(args, env);
+	}
+	else
+	{
 		printf("%s: path not found\n", args[0]);
 		exit(1);
 	}

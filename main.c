@@ -35,9 +35,6 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 			break;
 		}
 
-		builtin = get_builtin(args[0]);
-
-		if (builtin);
 		else
 			execute(args, env);
 		free(input);
