@@ -21,8 +21,8 @@ ssize_t _getline(char **input, size_t *size, FILE *stream)
 	if (chars == -1)
 		return (-1);
 
-	if (*input[chars - 1] == '\n')
-		*input[chars - 1] = '\0';
+	if ((*input)[chars - 1] == '\n')
+		(*input)[chars - 1] = '\0';
 
 	return (chars);
 }
