@@ -6,10 +6,11 @@
  * Return: 0
  */
 
-int main(void)
+int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[], char *env[])
 {
 	char *input, **args;
 	int r = 1;
+	void (*builtin)(char **, char **);
 
 	while (r)
 	{
@@ -34,7 +35,11 @@ int main(void)
 			break;
 		}
 
-		execute(args);
+		builtin = get_builtin(args[0]);
+
+		if (builtin);
+		else
+			execute(args, env);
 		free(input);
 		free(args);
 	}

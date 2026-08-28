@@ -61,3 +61,5 @@ char *_strtok(char *input, char *sep)
 	copy = copy + i + 1;
 	return (tok);
 }
+
+/* getenv function*/
