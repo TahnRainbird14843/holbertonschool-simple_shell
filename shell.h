@@ -18,7 +18,7 @@
 typedef struct commands
 {
 	char *cmd;
-	void (*func)(char **, char **);
+	int (*func)(char **, char **);
 } cmd_t;
 
 extern char **environ;
@@ -30,8 +30,11 @@ ssize_t _getline(char **buffer, size_t *size, FILE *stream);
 char *_strtok(char *input, char *sep);
 char *get_path(char *command);
 int execute(char **args, char **env);
-void (*get_builtin(char *cmd))(char **, char **);
+int (*get_builtin(char *cmd))(char **, char **);
 void check_exit(char **args, int *run);
 void sig_handle(int);
+int _cd(char **args, char **env);
+int _setenv(char **args, char **env);
+int _unsetenv(char **args, char **env);
 
 #endif
