@@ -29,10 +29,8 @@ char *get_path(char *command);
 ssize_t _getline(char **buffer, size_t *size, FILE *stream);
 char *_strtok(char *input, char *sep);
 char *get_path(char *command);
-int execute(char **args);
-void (*command_func(char *cmd))(char **, char **);
-void exec_ls(char **args, char **env);
-void exec_env(char **args, char **env);
+int execute(char **args, char **env);
+void (*get_builtin(char *cmd))(char **, char **);
 void check_exit(char **args, int *run);
 void sig_handle(int);
 

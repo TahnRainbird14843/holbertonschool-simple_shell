@@ -7,11 +7,15 @@
  * Return: pointer to function executes command otherwise NULL
  */
 
-void (*command_func(char *cmd))(char **, char **)
+void (*get_builtin(char *cmd))(char **, char **)
 {
-	cmd_t cmds[3] = {
-		{"ls", exec_ls},
-		{"env", exec_env},
+	cmd_t cmds[] = {
+		{"exit", NULL},
+		{"cd", NULL},
+		{"setenv", NULL},
+		{"unsetenv", NULL},
+		{"alias", NULL},
+		{"help", NULL},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -24,28 +28,4 @@ void (*command_func(char *cmd))(char **, char **)
 	}
 
 	return (NULL);
-}
-
-/**
- * exec_ls - executes ls command (execve())
- * @args: argument vector command
- * @env: environment variables
- */
-
-void exec_ls(char **args, char **env)
-{
-	args[0] = "/bin/ls";
-	execve(args[0], args, env);
-}
-
-/**
- * exec_env - executes env using execve()
- * @args: argument vector command
- * @env: environment variables
- */
-
-void exec_env(char **args, char **env)
-{
-	args[0] = "/bin/env";
-	execve(args[0], args, env);
 }

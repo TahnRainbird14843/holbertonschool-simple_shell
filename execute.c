@@ -7,7 +7,7 @@
  * Return: 1 - shell running otherwise 0 - exit
  */
 
-int execute(char **args)
+int execute(char **args, char **env)
 {
 	char *full_path;
 	pid_t pid;
@@ -16,16 +16,6 @@ int execute(char **args)
 	if (!args[0])
 		return (1);
 
-	if (strcmp(args[0], "exit") == 0)
-		return (0);
-
-	if (strcmp(args[0], "env") == 0)
-	{
-		for (e = environ; *e; e++)
-			printf("%s\n", *e);
-		return (1);
-	}
-
 	full_path = get_path(args[0]);
 
 	pid = fork();
@@ -33,7 +23,7 @@ int execute(char **args)
 	if (pid == 0)
 	{
 		if (full_path)
-			execve(full_path, args, environ);
+			execve(full_path, args, env);
 
 		printf("%s: path not found\n", args[0]);
 		exit(1);
