@@ -30,13 +30,13 @@ The following files are included in this project:
 | [shell.h](./shell.h)                          | Header file containing prototypes and macros |
 | [prompt.c](./prompt.c)      | Displays shell prompt only when running in interactive mode. |
 | [main.c](./main.c)                            | Main loop of shell                            |
-| [execute.c](./execute.c)                      |                                               |
-| [exit.c](./exit.c)                            |                                               |
-| [get\_path.c](./get_path.c)                   |                                               |
-| [get\_tokens.c](./get_tokens.c)               |                                               |
-| [input\_read.c](./input_read.c)               |                                               |
-| [builtins.c](./builtin.c)                     |                                               |
-| [custom\_funcs.c](./custom_funcs.c)           |                                               |
+| [execute.c](./execute.c)                      | Forks child process and executes using execve() |
+| [exit.c](./exit.c)                            | Handles exit builtin command and termination |
+| [get\_path.c](./get_path.c)                   | Searches PATH environment variable to locate executatble files                                              |
+| [get\_tokens.c](./get_tokens.c)               | Splits input lines into tokens for command execution                                              |
+| [input\_read.c](./input_read.c)               | Reads user input from standard output and manages buffer allocation                                              |
+| [builtins.c](./builtin.c)                     | Implements builtin commands (env, cd and exit)                                              |
+| [custom\_funcs.c](./custom_funcs.c)           | Defines helper functions in multiple source files                                              |
 
 ## Compile ⚙️
 
@@ -45,5 +45,8 @@ Compile program with:
 ```bash
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
+Run:
 
-     
+```bash
+./hsh
+```     
