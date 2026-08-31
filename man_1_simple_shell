@@ -12,6 +12,30 @@ Program is a simple command line interpreter. Executing commans read from stnada
 Developed using C programming language.
 
 .SH INTERACTIVE MODE
+Standard output is connected to terminal, by display the prompt:
 
+.PP
+$
+
+.PP
+The user enters commands, which get parsed & executed. Shell waits for each command to finish before displaying the next prompt. ($)
 
 .SH NON-INTERACTIVE MODE
+Input piped/redirected, shell reads commmands until EOF & executes each in order.
+
+.PP
+echo "la -l" | hsh
+
+.SH BUILTINS
+.TP
+.B exit [stat]
+Exit the shell if numberic stat is provided, shell exits with that stat otherwise, exits with stat 0.
+
+.TP
+.B env
+Print current encironment variables.
+
+.SH IMPLEMENTATION
+Shell uses following system calls and functions:
+
+
