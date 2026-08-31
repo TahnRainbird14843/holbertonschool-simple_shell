@@ -32,9 +32,13 @@ int (*get_builtin(char *cmd))(char **, char **)
 
 int _cd(char **args, char **env)
 {
+
 	struct stat path_stat;
 	char *cwd = malloc(128);
-	char *err = getcwd(cwd, 128);
+
+	(void)env; /*unused*/
+
+	getcwd(cwd, 128);
 
 	if (strcmp(args[1], "-") == 0)
 	{
@@ -55,7 +59,10 @@ int _cd(char **args, char **env)
 
 int _env(char **args, char **env)
 {
+
 	int i = 0;
+
+	(void)args; /*unused*/
 
 	while (env[i] != NULL)
 		printf("%s\n", env[i++]);

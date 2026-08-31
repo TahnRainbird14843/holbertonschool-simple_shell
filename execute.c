@@ -11,7 +11,7 @@ int execute(char **args, char **env)
 {
 	char *full_path;
 	pid_t pid;
-	char **e;
+	/*char **e;*/
 	int (*builtin)(char **, char **);
 
 	if (!args[0])
