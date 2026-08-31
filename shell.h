@@ -34,7 +34,9 @@ int (*get_builtin(char *cmd))(char **, char **);
 void check_exit(char **args, int *run);
 void sig_handle(int);
 int _cd(char **args, char **env);
+int _env(char **args, char **env);
 int _setenv(char **args, char **env);
 int _unsetenv(char **args, char **env);
+int get_env_size(char **env);
 
 #endif

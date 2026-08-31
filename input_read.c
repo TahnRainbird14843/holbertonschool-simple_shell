@@ -12,7 +12,7 @@ char *input_read(void)
 	size_t size = 0;
 	ssize_t l;
 
-	signal(SIGINT, SIG_IGN);
+	/*signal(SIGINT, SIG_IGN);*/
 	l = getline(&input, &size, stdin);
 	if (l == -1)
 	{

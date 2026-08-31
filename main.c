@@ -10,7 +10,10 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 {
 	char *input, **args;
 	int r = 1;
-	void (*builtin)(char **, char **);
+	int size = get_env_size(env);
+	char **envir = malloc(sizeof(char *) * size);
+
+	memcpy(envir, env, sizeof(char *) * size);
 
 	while (r)
 	{
@@ -36,10 +39,20 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 		}
 
 		else
-			execute(args, env);
+			execute(args, envir);
 		free(input);
 		free(args);
 	}
 
 	return (0);
+}
+
+int get_env_size(char **env)
+{
+	int i = 0;
+
+	while (env[i] != NULL)
+		i++;
+
+	return (i + 1);
 }

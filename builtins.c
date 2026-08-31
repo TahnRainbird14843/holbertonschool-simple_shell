@@ -10,10 +10,10 @@
 int (*get_builtin(char *cmd))(char **, char **)
 {
 	cmd_t cmds[] = {
-		{"exit", NULL},
 		{"cd", _cd},
+		{"env", _env},
 		{"setenv", _setenv},
-		{"unsetenv", NULL},
+		{"unsetenv", _unsetenv},
 		{"alias", NULL},
 		{"help", NULL},
 		{NULL, NULL}
@@ -53,22 +53,75 @@ int _cd(char **args, char **env)
 	return (0);
 }
 
+int _env(char **args, char **env)
+{
+	int i = 0;
+
+	while (env[i] != NULL)
+		printf("%s\n", env[i++]);
+
+	return (0);
+}
+
 int _setenv(char **args, char **env)
 {
 	char *var;
 	char *out = malloc(sizeof(args[1]) + sizeof(args[2]) + 1);
 	int i = 0;
 
+	memset(out, 0, sizeof(args[1]) + sizeof(args[2]) + 1);
+
 	while (env[i] != NULL)
 	{
 		var = strdup(env[i]);
 		if (strcmp(args[1], strtok(var, "=")) == 0)
 		{
-			out = strcat(strcat(args[1], "="), args[2]);
+			out = strcat(strcat(strcat(out, args[1]), "="), args[2]);
 			env[i] = out;
 			return (1);
 		}
 		i++;
+	}
+
+	if (!env[i])
+	{
+		env = realloc(env, sizeof(char *) * (i + 2));
+		out = strcat(strcat(strcat(out, args[1]), "="), args[2]);
+		env[i] = out;
+		env[i + 1] = NULL;
+		return (1);
+	}
+
+	return (0);
+}
+
+int _unsetenv(char **args, char **env)
+{
+	char *var;
+	int i = 0;
+	int found = 0;
+
+	while (env[i] != NULL)
+	{
+		var = strdup(env[i]);
+		if (found == 1)
+		{
+			env[i] = env[i + 1];
+			i++;
+		}
+		else if (strcmp(args[1], strtok(var, "=")) == 0)
+		{
+			found = 1;
+			env[i] = env[i + 1];
+			return (1);
+		}
+		i++;
+	}
+
+	if (found == 1)
+	{
+		env = realloc(env, sizeof(char *) * i);
+		return (1);
 	}
 
 	return (0);
