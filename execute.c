@@ -20,7 +20,7 @@ int execute(char **args, char **env)
 	full_path = get_path(args[0]);
 	builtin = get_builtin(args[0]);
 
-	if (full_path)
+	if (full_path && !builtin)
 	{
 		pid = fork();
 

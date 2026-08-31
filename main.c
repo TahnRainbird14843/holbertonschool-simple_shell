@@ -10,7 +10,6 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 {
 	char *input, **args;
 	int r = 1;
-	void (*builtin)(char **, char **);
 
 	while (r)
 	{

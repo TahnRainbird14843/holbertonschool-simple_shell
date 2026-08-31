@@ -53,6 +53,16 @@ int _cd(char **args, char **env)
 	return (0);
 }
 
+int _env(char **args, char **env)
+{
+	int i = 0;
+
+	while (env[i] != NULL)
+		printf("%s\n", env[i++]);
+
+	return (0);
+}
+
 int _setenv(char **args, char **env)
 {
 	char *var;
