@@ -43,7 +43,7 @@ char *_strtok(char *input, char *sep)
 
 	if (input)
 		copy = strdup(input);
-	if (copy == NULL)
+	if (copy == NULL || tok == NULL)
 		return (NULL);
 
 	while (copy[i] != '\0' && copy[i] != sep[0])
@@ -51,6 +51,7 @@ char *_strtok(char *input, char *sep)
 		tok[i] = copy[i];
 		i++;
 	}
+	tok[i] = '\0';
 
 	if (copy[i] == '\0')
 	{
@@ -63,3 +64,28 @@ char *_strtok(char *input, char *sep)
 }
 
 /* getenv function*/
+
+/**
+ * _getenv - gets value of environment variable
+ * @var: name of environment var
+ *
+ * Return: pointer to val of env var otherwise NULL
+ */
+
+char *_getenv(const char *var)
+{
+	int i = 0;
+	size_t l = strlen(var);
+
+	while (environ[i])
+	{
+		if (strncmp(environ[i], var, l) == 0 &&
+				environ[i][l] == '=')
+		{
+			return environ[i] + l + 1;
+		}
+		i++;
+	}
+
+	return (NULL);
+}
