@@ -82,7 +82,7 @@ char *_getenv(const char *var)
 		if (strncmp(environ[i], var, l) == 0 &&
 				environ[i][l] == '=')
 		{
-			return environ[i] + l + 1;
+			return (environ[i] + l + 1);
 		}
 		i++;
 	}

@@ -2,6 +2,9 @@
 
 /**
  * main - entry point dimple shell
+ * @argv: argument vector
+ * @env: environment
+ * @argc: argument count
  *
  * Return: 0
  */
@@ -46,6 +49,13 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 
 	return (0);
 }
+
+/**
+ * get_env_size - count environment variables
+ * @env: environment variable array
+ *
+ * Return: num of entried in env including NULL
+ */
 
 int get_env_size(char **env)
 {
