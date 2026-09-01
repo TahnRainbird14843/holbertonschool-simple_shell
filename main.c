@@ -9,7 +9,9 @@
  * Return: 0
  */
 
-int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[], char *env[])
+int main(__attribute__ ((unused)) int argc,
+		__attribute__ ((unused)) char *argv[],
+		char *env[])
 {
 	char *input, **args;
 	int r = 1;
