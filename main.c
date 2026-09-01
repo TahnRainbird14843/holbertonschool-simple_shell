@@ -14,7 +14,6 @@ int main(__attribute__ ((unused)) int argc,
 		char *env[])
 {
 	char *input, **args;
-	int r = 1;
 	int size = get_env_size(env);
 	char **envir = malloc(sizeof(char *) * size);
 	int i = 0;
@@ -27,7 +26,7 @@ int main(__attribute__ ((unused)) int argc,
 	}
 	envir[i] = NULL;
 
-	while (r)
+	while (1)
 	{
 		prompt();
 		input = input_read();
@@ -43,16 +42,11 @@ int main(__attribute__ ((unused)) int argc,
 		}
 
 		check_exit(args, last_status);
-		if (!r)
-		{
-			free(input);
-			free(args);
-			break;
-		}
 		last_status = execute(args, envir);
 		
-		free(input);
-		free(args);
+			free(input);
+			free(args);
+
 	}
 	i = 0;
 	while (envir[i])
