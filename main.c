@@ -18,7 +18,12 @@ int main(__attribute__ ((unused)) int argc,
 	int size = get_env_size(env);
 	char **envir = malloc(sizeof(char *) * size);
 
-	memcpy(envir, env, sizeof(char *) * size);
+	while (env[i])
+	{
+		envir[i] = strdup(env[i]);
+		i++;
+	}
+	envir[i] = NULL'
 
 	while (r)
 	{
@@ -48,6 +53,13 @@ int main(__attribute__ ((unused)) int argc,
 		free(input);
 		free(args);
 	}
+	i = 0;
+	while (envir[i])
+	{
+		free(envir[i]);
+		i++;
+	}
+	free(envir);
 
 	return (0);
 }

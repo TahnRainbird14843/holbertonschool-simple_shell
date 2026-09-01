@@ -2,6 +2,7 @@
 #define SHELL_H
 
 #include <unistd.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -38,5 +39,6 @@ int _env(char **args, char **env);
 int _setenv(char **args, char **env);
 int _unsetenv(char **args, char **env);
 int get_env_size(char **env);
+char *get_home(char **env);
 
 #endif
