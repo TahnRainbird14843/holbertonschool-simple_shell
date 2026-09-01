@@ -7,11 +7,11 @@
  * Return: string with full path otherwise NULL
  */
 
-char *get_path(char *command)
+char *get_path(char *command, char **env)
 {
 	char full_path[1024];
 	char *p_copy, *dire;
-	char *path = getenv("PATH");
+	char *path = fetch_env("PATH", env);
 
 	if (!path)
 		return (NULL);
