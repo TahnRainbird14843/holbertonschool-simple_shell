@@ -13,6 +13,7 @@ int execute(char **args, char **env)
 	char *full_path;
 	pid_t pid;
 	/*char **e;*/
+	int status;
 	int (*builtin)(char **, char **);
 
 	if (!args[0])
@@ -28,16 +29,25 @@ int execute(char **args, char **env)
 		if (pid == 0)
 		{
 			execve(full_path, args, env);
+			free(full_path);
+			exit(127);
 		}
+
+		wait(&status);
+		free(full_path);
+
+		return WEXITSTATUS(status);
 	}
 	else if (builtin)
 	{
+		free(full_path);
 		builtin(args, env);
 	}
 	else
 	{
 		printf("%s: path not found\n", args[0]);
-		exit(1);
+		free(full_path);
+		return (127);
 	}
 
 	wait(NULL);

@@ -32,7 +32,7 @@ char *_strtok(char *input, char *sep);
 char *get_path(char *command, char **env);
 int execute(char **args, char **env);
 int (*get_builtin(char *cmd))(char **, char **);
-void check_exit(char **args, int *run);
+void check_exit(char **args, int Last_status);
 void sig_handle(int);
 int _cd(char **args, char **env);
 int _env(char **args, char **env);

@@ -7,7 +7,7 @@
  *
  */
 
-void check_exit(char **args, int *run)
+void check_exit(char **args, int last_status)
 {
 	int exit_code;
 
@@ -21,7 +21,7 @@ void check_exit(char **args, int *run)
 
 		else
 		{
-			*run = 0;
+			exit(last_status);
 		}
 	}
 }
