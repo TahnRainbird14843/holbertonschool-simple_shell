@@ -13,16 +13,13 @@ ssize_t _getline(char **input, size_t *size, FILE *stream)
 {
 	ssize_t chars;
 
-	if (!*input)
+	if (!input)
 		return (-1);
 
-	chars = read(fileno(stream), *input, *size);
+	if (!(*input))
+		*input = malloc(64);
 
-	if (chars == -1)
-		return (-1);
-
-	if ((*input)[chars - 1] == '\n')
-		(*input)[chars - 1] = '\0';
+	chars = read(fileno(stream), *input, 64);
 
 	return (chars);
 }

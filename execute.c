@@ -36,7 +36,6 @@ int execute(char **args, char **env)
 	else
 	{
 		printf("%s: path not found\n", args[0]);
-		exit(1);
 	}
 
 	wait(NULL);

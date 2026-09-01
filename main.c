@@ -19,8 +19,11 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 	{
 		prompt();
 		input = input_read();
-		if (!input)
+		if (!input || strcmp(input, "") == 0)
+		{
+			printf("\n");
 			break;
+		}
 
 		args = get_tokens(input);
 		if (!args || !args[0])
@@ -42,6 +45,8 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 			execute(args, envir);
 		free(input);
 		free(args);
+		input = NULL;
+		args = NULL;
 	}
 
 	return (0);
