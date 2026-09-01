@@ -66,23 +66,23 @@ char *_strtok(char *input, char *sep)
 /* getenv function*/
 
 /**
- * _getenv - gets value of environment variable
+ * Fetch_env - gets value of environment variable
  * @var: name of environment var
  *
  * Return: pointer to val of env var otherwise NULL
  */
 
-char *_getenv(const char *var)
+char *fetch_env(const char *var)
 {
 	int i = 0;
-	size_t l = strlen(var);
+	int l = strlen(var);
 
-	while (environ[i])
+	while (env[i])
 	{
-		if (strncmp(environ[i], var, l) == 0 &&
-				environ[i][l] == '=')
+		if (strncmp(env[i], var, l) == 0 &&
+				env[i][l] == '=')
 		{
-			return (environ[i] + l + 1);
+			return (env[i] + l + 1);
 		}
 		i++;
 	}

@@ -18,7 +18,7 @@ int execute(char **args, char **env)
 	if (!args[0])
 		return (1);
 
-	full_path = get_path(args[0]);
+	full_path = get_path(args[0], env);
 	builtin = get_builtin(args[0]);
 
 	if (full_path && !builtin)
