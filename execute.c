@@ -3,6 +3,7 @@
 /**
  * execute - command run from forking & calling execve
  * @args: array tokens
+ * @env: environment
  *
  * Return: 1 - shell running otherwise 0 - exit
  */

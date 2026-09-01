@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * command_func - returns handler func for given command
+ * get_builtin - returns handler func for given command
  * @cmd: command string
  *
  * Return: pointer to function executes command otherwise NULL
@@ -30,6 +30,14 @@ int (*get_builtin(char *cmd))(char **, char **)
 	return (NULL);
 }
 
+/**
+ * _cd - changes current working direct
+ * @args: array of arguments
+ * @env: environment variables (unused)
+ *
+ * Return: 1 - success otherwise 0
+ */
+
 int _cd(char **args, char **env)
 {
 
@@ -57,6 +65,14 @@ int _cd(char **args, char **env)
 	return (0);
 }
 
+/**
+ * _env - prints environment variables
+ * @args: argument array
+ * @env: environment variables
+ *
+ * Return: 1
+ */
+
 int _env(char **args, char **env)
 {
 
@@ -69,6 +85,14 @@ int _env(char **args, char **env)
 
 	return (0);
 }
+
+/**
+ * _setenv - set environment variables
+ * @args: arguments
+ * @env: environment variables
+ *
+ * Return: 1 - success otherwise 0
+ */
 
 int _setenv(char **args, char **env)
 {
@@ -101,6 +125,14 @@ int _setenv(char **args, char **env)
 
 	return (0);
 }
+
+/**
+ * _unsetenv - removes environment variables
+ * @args: arguments
+ * @env: environment variables
+ *
+ * Return: 1 - success otherwise 0.
+ */
 
 int _unsetenv(char **args, char **env)
 {
