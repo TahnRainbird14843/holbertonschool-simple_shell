@@ -72,7 +72,7 @@ char *_strtok(char *input, char *sep)
  * Return: pointer to val of env var otherwise NULL
  */
 
-char *fetch_env(const char *var)
+char *fetch_env(char *var, char **env)
 {
 	int i = 0;
 	int l = strlen(var);
