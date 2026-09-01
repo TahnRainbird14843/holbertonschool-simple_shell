@@ -17,13 +17,14 @@ int main(__attribute__ ((unused)) int argc,
 	int r = 1;
 	int size = get_env_size(env);
 	char **envir = malloc(sizeof(char *) * size);
+	int i = 0;
 
 	while (env[i])
 	{
 		envir[i] = strdup(env[i]);
 		i++;
 	}
-	envir[i] = NULL'
+	envir[i] = NULL;
 
 	while (r)
 	{
