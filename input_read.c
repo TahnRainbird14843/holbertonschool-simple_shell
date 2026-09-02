@@ -11,6 +11,7 @@ char *input_read(void)
 	char *input = NULL;
 	size_t size = 0;
 	ssize_t l;
+	char a;
 
 	/*signal(SIGINT, SIG_IGN);*/
 	l = getline(&input, &size, stdin);
@@ -21,7 +22,9 @@ char *input_read(void)
 	}
 
 	if (input[l - 1] == '\n')
+	{
 		input[l - 1] = '\0';
+	}
 
 	return (input);
 }

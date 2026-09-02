@@ -33,7 +33,10 @@ int main(__attribute__ ((unused)) int argc,
 
 		input = input_read();
 		if (!input)
+		{
+			printf("\n");
 			break;
+		}
 
 		args = get_tokens(input);
 		if (!args || !args[0])
@@ -49,6 +52,12 @@ int main(__attribute__ ((unused)) int argc,
 			free(input);
 			free(args);
 
+		else
+			execute(args, envir);
+		free(input);
+		free(args);
+		input = NULL;
+		args = NULL;
 	}
 	i = 0;
 	while (envir[i])
