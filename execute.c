@@ -23,7 +23,8 @@ int execute(char **args, char *pgm, char **env)
 
 	if (builtin)
 	{
-		free(full_path);
+		if (full_path)
+			free(full_path);
 		builtin(args, env);
 	}
 	else if (full_path)
@@ -36,7 +37,7 @@ int execute(char **args, char *pgm, char **env)
 		wait(&status);
 		free(full_path);
 
-		return WEXITSTATUS(status);
+		return (WEXITSTATUS(status));
 	}
 	else
 	{

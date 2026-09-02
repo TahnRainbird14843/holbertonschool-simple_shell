@@ -40,32 +40,35 @@ char *_strtok(char *input, char *sep)
 	int i = 0;
 	char *tok = malloc(64);
 	static char *copy;
+	static int j = 0;
 
 	if (tok == NULL)
 		return (NULL);
 	if (input)
+	{
 		copy = strdup(input);
+	}
 	if (copy == NULL)
 	{
 		free(tok);
 		return (NULL);
 	}
 
-	while (copy[i] != '\0' && copy[i] != sep[0])
+	while (copy[j] != '\0' && copy[j] != sep[0])
 	{
-		tok[i] = copy[i];
-		i++;
+		tok[i] = copy[j];
+		i++, j++;
 	}
 	tok[i] = '\0';
 
-	if (copy[i] == '\0')
+	if (copy[j] == '\0')
 	{
 		free(copy);
 		copy = NULL;
+		j = 0;
 		return (tok);
 	}
 
-	copy = copy + i + 1;
 	return (tok);
 }
 

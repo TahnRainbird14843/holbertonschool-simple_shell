@@ -45,7 +45,7 @@ int main(__attribute__ ((unused)) int argc,
 			if (run == 1)
 				execute(args, argv[0], envir);
 		}
-		free(input);
+
 		i = 0;
 		while(args[i] != NULL)
 		{
