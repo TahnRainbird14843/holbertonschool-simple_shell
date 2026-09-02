@@ -8,7 +8,7 @@
  * Return: 1 - shell running otherwise 0 - exit
  */
 
-int execute(char **args, char **env)
+int execute(char **args, char *pgm, char **env)
 {
 	char *full_path;
 	pid_t pid;
@@ -40,7 +40,7 @@ int execute(char **args, char **env)
 	}
 	else
 	{
-		printf("%s: path not found\n", args[0]);
+		printf("%s 1: %s: not found\n", pgm, args[0]);
 		free(full_path);
 		return (127);
 	}
