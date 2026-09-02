@@ -13,18 +13,15 @@ char *get_path(char *command, char **env)
 	char *p_copy, *dire;
 	char *path = fetch_env("PATH", env);
 
-	if (!path)
+	if (access(command, X_OK) == 0)
+		return (strdup(command));
+
+	if (!path || path[0] == '\0')
 		return (NULL);
 
 	p_copy = strdup(path);
 	if (!p_copy)
 		return (NULL);
-
-	if (access(command, X_OK) == 0)
-	{
-		free(p_copy);
-		return (strdup(command));
-	}
 
 	dire = strtok(p_copy, ":");
 
