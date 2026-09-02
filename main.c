@@ -10,14 +10,14 @@
  */
 
 int main(__attribute__ ((unused)) int argc,
-		__attribute__ ((unused)) char *argv[],
+		char *argv[],
 		char *env[])
 {
 	char *input, **args;
 	int size = get_env_size(env);
 	char **envir = malloc(sizeof(char *) * size);
 	int i = 0;
-	int last_status = 0;
+	int run = 1;
 
 	while (env[i])
 	{
@@ -26,7 +26,7 @@ int main(__attribute__ ((unused)) int argc,
 	}
 	envir[i] = NULL;
 
-	while (1)
+	while (run)
 	{
 		if (isatty(STDIN_FILENO))
 			prompt();
@@ -41,10 +41,17 @@ int main(__attribute__ ((unused)) int argc,
 
 		if (args && args[0])
 		{
-			check_exit(args, last_status);
-			execute(args, envir);
+			check_exit(args, &run);
+			if (run == 1)
+				execute(args, argv[0], envir);
 		}
 		free(input);
+		i = 0;
+		while(args[i] != NULL)
+		{
+			free(args[i]);
+			i++;
+		}
 		free(args);
 		input = NULL;
 		args = NULL;
