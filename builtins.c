@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * command_func - returns handler func for given command
+ * get_builtin - returns handler func for given command
  * @cmd: command string
  *
  * Return: pointer to function executes command otherwise NULL
@@ -30,32 +30,48 @@ int (*get_builtin(char *cmd))(char **, char **)
 	return (NULL);
 }
 
+/**
+ * _cd - changes current working direct
+ * @args: array of arguments
+ * @env: environment variables (unused)
+ *
+ * Return: 1 - success otherwise 0
+ */
+
 int _cd(char **args, char **env)
 {
 
-	struct stat path_stat;
-	char *cwd = malloc(128);
+	struct stat st;
+	char *tar = NULL;
 
-	(void)env; /*unused*/
+	if (!args[1] || strcmp(args[1], "-") == 0)
+		tar = get_home(env);
 
-	getcwd(cwd, 128);
+	else
+		tar = args[1];
 
-	if (strcmp(args[1], "-") == 0)
+	if (!tar)
 	{
-		cwd = getenv("HOME");
-		chdir(cwd);
-		return (1);
-	}
-	cwd = strcat(strcat(cwd, "/"), args[1]);
-	if (stat(cwd, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
-	{
-		chdir(cwd);
-		return (1);
+		printf("HOME\n");
+		return (0);
 	}
 
-	printf("Path does not exist\n");
-	return (0);
+	if (stat(tar, &st) == 0 && S_ISDIR(st.st_mode))
+	{
+		if (chdir(tar) == 0)
+			return (1);
+	}
+		printf("Path does not exist\n");
+		return (0);
 }
+
+/**
+ * _env - prints environment variables
+ * @args: argument array
+ * @env: environment variables
+ *
+ * Return: 1
+ */
 
 int _env(char **args, char **env)
 {
@@ -64,72 +80,96 @@ int _env(char **args, char **env)
 
 	(void)args; /*unused*/
 
-	while (env[i] != NULL)
-		printf("%s\n", env[i++]);
+	while (env[i])
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
 
-	return (0);
+	return (1);
 }
+
+/**
+ * _setenv - set environment variables
+ * @args: arguments
+ * @env: environment variables
+ *
+ * Return: 1 - success otherwise 0
+ */
 
 int _setenv(char **args, char **env)
 {
-	char *var;
-	char *out = malloc(sizeof(args[1]) + sizeof(args[2]) + 1);
+	char *name = args[1];
+	char *val = args[2];
+	char *new;
 	int i = 0;
 
-	memset(out, 0, sizeof(args[1]) + sizeof(args[2]) + 1);
+	if (!name || !val)
+		return (0);
 
-	while (env[i] != NULL)
+	while (env[i])
 	{
-		var = strdup(env[i]);
-		if (strcmp(args[1], strtok(var, "=")) == 0)
+		if (strncmp(env[i], name, strlen(name)) == 0 &&
+			env[i][strlen(name)] == '=')
 		{
-			out = strcat(strcat(strcat(out, args[1]), "="), args[2]);
-			env[i] = out;
+			free(env[i]);
+
+			new = malloc(strlen(name) + strlen(val) + 2);
+			if (!new)
+				return (0);
+
+			sprintf(new, "%s=%s", name, val);
+			env[i] = new;
 			return (1);
 		}
 		i++;
 	}
+	new = malloc(strlen(name) + strlen(val) + 2);
+	if (!new)
+		return (0);
 
-	if (!env[i])
-	{
-		env = realloc(env, sizeof(char *) * (i + 2));
-		out = strcat(strcat(strcat(out, args[1]), "="), args[2]);
-		env[i] = out;
-		env[i + 1] = NULL;
-		return (1);
-	}
+	sprintf(new, "%s=%s", name, val);
 
-	return (0);
+	env[i] = new;
+	env[i + 1] = NULL;
+
+	return (1);
 }
+
+/**
+ * _unsetenv - removes environment variables
+ * @args: arguments
+ * @env: environment variables
+ *
+ * Return: 1 - success otherwise 0.
+ */
 
 int _unsetenv(char **args, char **env)
 {
-	char *var;
-	int i = 0;
-	int found = 0;
+	char *name;
+	int i = 0, j;
 
-	while (env[i] != NULL)
+	if (!args[1])
+		return (0);
+
+	name = args[1];
+
+	while (env[i])
 	{
-		var = strdup(env[i]);
-		if (found == 1)
+		if (strncmp(env[i], name, strlen(name)) == 0 &&
+			env[i][strlen(name)] == '=')
 		{
-			env[i] = env[i + 1];
-			i++;
-		}
-		else if (strcmp(args[1], strtok(var, "=")) == 0)
-		{
-			found = 1;
-			env[i] = env[i + 1];
+			j = i;
+
+			while (env[j])
+			{
+				env[j] = env[j + 1];
+				j++;
+			}
+
 			return (1);
 		}
 		i++;
 	}
-
-	if (found == 1)
-	{
-		env = realloc(env, sizeof(char *) * i);
-		return (1);
-	}
-
 	return (0);
 }
