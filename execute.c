@@ -42,7 +42,7 @@ int execute(char **args, char *pgm, char **env, int *status)
 	}
 	else
 	{
-		printf("%s: 1: %s: not found\n", pgm, args[0]);
+		fprintf(stderr, "%s: 1: %s: not found\n", pgm, args[0]);
 		*status = 127;
 	}
 
