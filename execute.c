@@ -36,7 +36,7 @@ int execute(char **args, char *pgm, char **env, int *status)
 
 		wait(&st);
 		free(full_path);
-		*status = 0;
+		*status = WEXITSTATUS(st);
 
 		return (1);
 	}
