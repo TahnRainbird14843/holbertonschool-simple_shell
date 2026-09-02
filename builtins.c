@@ -45,7 +45,7 @@ int _cd(char **args, char **env)
 	char *tar = NULL;
 
 	if (!args[1] || strcmp(args[1], "-") == 0)
-		tar = get_home(env);
+		tar = fetch_env("HOME", env);
 
 	else
 		tar = args[1];
@@ -104,8 +104,10 @@ int _setenv(char **args, char **env)
 	char *new;
 	int i = 0;
 
-	if (!name || !val)
+	if (!name)
 		return (0);
+	if (!val)
+		val = "";
 
 	while (env[i])
 	{
