@@ -13,11 +13,11 @@ char *get_path(char *command, char **env)
 	char *p_copy, *dire;
 	char *path = fetch_env("PATH", env);
 
-	if (access(command, X_OK) == 0)
-		return (strdup(command));
-
 	if (!path || path[0] == '\0')
 		return (NULL);
+
+	if (access(command, X_OK) == 0)
+		return (strdup(command));
 
 	p_copy = strdup(path);
 	if (!p_copy)
