@@ -11,7 +11,6 @@ char *input_read(void)
 	char *input = NULL;
 	size_t size = 0;
 	ssize_t l;
-	char a;
 
 	/*signal(SIGINT, SIG_IGN);*/
 	l = getline(&input, &size, stdin);
