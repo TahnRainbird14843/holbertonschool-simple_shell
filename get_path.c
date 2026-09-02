@@ -23,7 +23,7 @@ char *get_path(char *command, char **env)
 	if (!p_copy)
 		return (NULL);
 
-	dire = _strtok(p_copy, ":");
+	dire = strtok(p_copy, ":");
 
 	while (dire)
 	{
@@ -35,10 +35,9 @@ char *get_path(char *command, char **env)
 		if (access(full_path, X_OK) == 0)
 		{
 			free(p_copy);
-			return (strdup(full_path));
+			return(strdup(full_path));
 		}
-
-		dire = _strtok(NULL, ":");
+		dire = strtok(NULL, ":");
 	}
 
 	free(p_copy);
