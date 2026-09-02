@@ -9,15 +9,12 @@
 
 void check_exit(char **args, int *run, int *status)
 {
-	int exit_code;
-
 	if (strcmp(args[0], "exit") == 0)
 	{
 		if (args[1])
-		{
-			exit_code = atoi(args[1]);
-			*status = exit_code;
-		}
+			*status = atoi(args[1]);
+		else
+			*status = 0;
 
 		*run = 0;
 	}
