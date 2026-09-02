@@ -39,21 +39,12 @@ int main(__attribute__ ((unused)) int argc,
 		}
 
 		args = get_tokens(input);
-		if (!args || !args[0])
+
+		if (args && args[0])
 		{
-			free(input);
-			free(args);
-			continue;
-		}
-
-		check_exit(args, last_status);
-		last_status = execute(args, envir);
-		
-			free(input);
-			free(args);
-
-		else
+			check_exit(args, last_status);
 			execute(args, envir);
+		}
 		free(input);
 		free(args);
 		input = NULL;
