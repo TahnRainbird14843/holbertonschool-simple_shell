@@ -9,7 +9,7 @@
  * Return: Pointer to buffer otherwise NULL
  */
 
-ssize_t _getline(char **input, size_t *size, FILE *stream)
+ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size, FILE *stream)
 {
 	ssize_t chars;
 
