@@ -14,7 +14,7 @@ void check_exit(char **args, int *run, int *status)
 		if (args[1])
 			*status = atoi(args[1]);
 		else
-			*status = 0;
+			*status = 2;
 
 		*run = 0;
 	}
