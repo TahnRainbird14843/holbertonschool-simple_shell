@@ -43,7 +43,6 @@ int execute(char **args, char *pgm, char **env, int *status)
 	else
 	{
 		printf("%s: 1: %s: not found\n", pgm, args[0]);
-		free(full_path);
 		*status = 127;
 	}
 
