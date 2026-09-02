@@ -47,12 +47,7 @@ int main(__attribute__ ((unused)) int argc,
 				execute(args, argv[0], envir, &status);
 		}
 
-		i = 0;
-		while(args[i] != NULL)
-		{
-			free(args[i]);
-			i++;
-		}
+		free(input);
 		free(args);
 		input = NULL;
 		args = NULL;
