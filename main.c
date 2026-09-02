@@ -34,7 +34,6 @@ int main(__attribute__ ((unused)) int argc,
 		input = input_read();
 		if (!input)
 		{
-			printf("\n");
 			break;
 		}
 
