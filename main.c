@@ -28,7 +28,9 @@ int main(__attribute__ ((unused)) int argc,
 
 	while (1)
 	{
-		prompt();
+		if (isatty(STDIN_FILENO))
+			prompt();
+
 		input = input_read();
 		if (!input)
 			break;

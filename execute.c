@@ -12,12 +12,11 @@ int execute(char **args, char **env)
 {
 	char *full_path;
 	pid_t pid;
-	/*char **e;*/
 	int status;
 	int (*builtin)(char **, char **);
 
 	if (!args[0])
-		return (1);
+		return (0);
 
 	full_path = get_path(args[0], env);
 	builtin = get_builtin(args[0]);
@@ -41,7 +40,7 @@ int execute(char **args, char **env)
 	else if (builtin)
 	{
 		free(full_path);
-		builtin(args, env);
+		return (builtin(args, env));
 	}
 	else
 	{
@@ -49,8 +48,4 @@ int execute(char **args, char **env)
 		free(full_path);
 		return (127);
 	}
-
-	wait(NULL);
-	free(full_path);
-	return (1);
 }
