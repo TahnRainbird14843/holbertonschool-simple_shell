@@ -19,7 +19,7 @@ int main(__attribute__ ((unused)) int argc, __attribute__ ((unused)) char *argv[
 	{
 		prompt();
 		input = input_read();
-		if (!input || strcmp(input, "") == 0)
+		if (!input)
 		{
 			printf("\n");
 			break;

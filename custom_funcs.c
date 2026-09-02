@@ -17,7 +17,10 @@ ssize_t _getline(char **input, size_t *size, FILE *stream)
 		return (-1);
 
 	if (!(*input))
+	{
 		*input = malloc(64);
+		*input = memset(*input, 0, 64);
+	}
 
 	chars = read(fileno(stream), *input, 64);
 
