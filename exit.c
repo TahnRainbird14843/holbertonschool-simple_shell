@@ -13,8 +13,10 @@ void check_exit(char **args, int *run, int *status)
 	{
 		if (args[1])
 			*status = atoi(args[1]);
-		else
+		else if (isatty(STDIN_FILENO))
 			*status = 2;
+		else
+			*status = 0;
 
 		*run = 0;
 	}
