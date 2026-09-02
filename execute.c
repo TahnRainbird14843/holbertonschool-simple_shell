@@ -8,11 +8,11 @@
  * Return: 1 - shell running otherwise 0 - exit
  */
 
-int execute(char **args, char *pgm, char **env)
+int execute(char **args, char *pgm, char **env, int *status)
 {
 	char *full_path;
+	int st;
 	pid_t pid;
-	int status;
 	int (*builtin)(char **, char **);
 
 	if (!args[0] || args[0][0] == '\0')
@@ -34,16 +34,17 @@ int execute(char **args, char *pgm, char **env)
 		if (pid == 0)
 			execve(full_path, args, env);
 
-		wait(&status);
+		wait(&st);
 		free(full_path);
+		*status = 0;
 
-		return (WEXITSTATUS(status));
+		return (1);
 	}
 	else
 	{
-		printf("%s 1: %s: not found\n", pgm, args[0]);
+		printf("%s: 1: %s: not found\n", pgm, args[0]);
 		free(full_path);
-		return (127);
+		*status = 127;
 	}
 
 	return (1);
