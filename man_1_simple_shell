@@ -6,7 +6,7 @@ hsh - simple UNIX command interpreter
 
 .SH DESCRIPTION
 .B hsh
-Program is a simple command line interpreter. Executing commans read from stnadard input. Program mimics behaviour of .B/bin/sh for basic command execution.
+Program is a simple command line interpreter. Executing commans read from standard input. Program mimics behaviour of .B/bin/sh for basic command execution.
 
 .SH BUILD
 Developed using C programming language.
@@ -21,7 +21,7 @@ $
 The user enters commands, which get parsed & executed. Shell waits for each command to finish before displaying the next prompt. ($)
 
 .SH NON-INTERACTIVE MODE
-Input piped/redirected, shell reads commmands until EOF & executes each in order.
+Input piped/redirected, shell reads commands until EOF & executes each in order.
 
 .PP
 echo "la -l" | hsh
@@ -33,9 +33,54 @@ Exit the shell if numberic stat is provided, shell exits with that stat otherwis
 
 .TP
 .B env
-Print current encironment variables.
+Print current environment variables.
+
+.SH EXAMPLES
+Interactive mode:
+
+.PP
+Interactive mode:
+
+.PP
+.nf
+$ ls
+$ ls -l
+$ echo "hello world"
+$ exit
+.fi
+
+Non-interactive mode:
+
+.PP
+.nf
+$echo "ls -l" | hsh
+.fi
 
 .SH IMPLEMENTATION
 Shell uses following system calls and functions:
 
+.PP
+fork(), execve(), wait(), stat(), perror(), strtok(), read(), write(), malloc(), free()
 
+.SH DESCRIPTION
+Command interpreter that reads input, parses it into tokens and identifies if command is built-in or external. Executes command.
+
+.PP
+When shell starts, environment is duplicated so modifications to variables  do not affect parent process. Shell enters a loop that continues until user implements built-in exit command or until EOF is reached.
+
+.PP
+Interactive mode - shell displays prompt before reading user input.
+Non-interactive mode - input is read direct from standard input without prompting.
+
+.SH EXIT STATUS
+Shell exits with the status of last executed command.
+
+.PP
+If command is not found, shell exits with status 127.
+If user implements the built-in
+.B exit
+Withoutargument, shell exits using last recorded status.
+
+.SH AUTHORS
+Tahn R
+Carma H
