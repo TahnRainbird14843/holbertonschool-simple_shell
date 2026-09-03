@@ -11,20 +11,41 @@
 
 ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size, FILE *stream)
 {
-	ssize_t chars;
+	static char buffer[1024];
+	static ssize_t buff_len = 0, buff = 0;
+
+	ssize_t count = 0;
+	char c;
 
 	if (!input)
 		return (-1);
 
 	if (!(*input))
 	{
-		*input = malloc(64);
-		*input = memset(*input, 0, 64);
+		*input = malloc(1024);
+		if (!*input)
+			return (-1);
 	}
 
-	chars = read(fileno(stream), *input, 64);
+	while (1)
+	{
+		if (buff >= buff_len)
+		{
+			buff_len = read(fileno(stream), buffer, 1024);
+			buff = 0;
 
-	return (chars);
+			if (buff_len <= 0)
+				return (count > 0 ? count : -1);
+		}
+
+		c = buffer[buff++];
+		(*input)[count] = c;
+
+		if (c == '\n')
+			break;
+	}
+	(*input)[count] = '\0';
+	return (count);
 }
 
 /**
@@ -38,22 +59,24 @@ ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size, FILE *strea
 char *_strtok(char *input, char *sep)
 {
 	int i = 0;
-	char *tok = malloc(64);
+	char *tok;
 	static char *copy;
 	static int j = 0;
 
-	if (tok == NULL)
-		return (NULL);
+
 	if (input)
 	{
+		free(copy);
 		copy = strdup(input);
+		j = 0;
 	}
-	if (copy == NULL)
-	{
-		free(tok);
+	if (!copy)
 		return (NULL);
-	}
-
+	
+	tok = malloc(64);
+	if (!tok)
+		return (NULL);
+	
 	while (copy[j] != '\0' && copy[j] != sep[0])
 	{
 		tok[i] = copy[j];
@@ -66,7 +89,10 @@ char *_strtok(char *input, char *sep)
 		free(copy);
 		copy = NULL;
 		j = 0;
-		return (tok);
+	}
+	else
+	{
+		j++;
 	}
 
 	return (tok);
