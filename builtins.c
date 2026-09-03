@@ -153,6 +153,8 @@ int _unsetenv(char **args, char **env)
 		if (strncmp(env[i], name, strlen(name)) == 0 &&
 			env[i][strlen(name)] == '=')
 		{
+
+			free(env[i]);
 			j = i;
 
 			while (env[j])
