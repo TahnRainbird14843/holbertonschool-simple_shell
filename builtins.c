@@ -137,6 +137,7 @@ int _setenv(char **args, char ***env_addr)
 	}
 	new_env[i] = new;
 	new_env[i + 1] = NULL;
+	free(env);
 	*env_addr = new_env;
 
 	return (0);
