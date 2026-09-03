@@ -12,7 +12,7 @@ char *input_read(void)
 	size_t size = 0;
 	ssize_t l;
 
-	/*signal(SIGINT, SIG_IGN);*/
+	signal(SIGINT, sig_handle);
 	l = getline(&input, &size, stdin);
 	if (l == -1)
 	{
@@ -26,4 +26,11 @@ char *input_read(void)
 	}
 
 	return (input);
+}
+
+void sig_handle(__attribute__ ((unused)) int sig)
+{
+	printf("\n");
+	if (isatty(STDIN_FILENO))
+		prompt();
 }
