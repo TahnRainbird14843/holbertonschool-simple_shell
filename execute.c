@@ -8,17 +8,17 @@
  * Return: 1 - shell running otherwise 0 - exit
  */
 
-int execute(char **args, char *pgm, char **env, int *status)
+int execute(char **args, char *pgm, char ***env, int *status)
 {
 	char *full_path;
 	int st;
 	pid_t pid;
-	int (*builtin)(char **, char **);
+	int (*builtin)(char **, char ***);
 
 	if (!args[0] || args[0][0] == '\0')
 		return (0);
 
-	full_path = get_path(args[0], env);
+	full_path = get_path(args[0], *env);
 	builtin = get_builtin(args[0]);
 
 	if (builtin)
@@ -32,7 +32,7 @@ int execute(char **args, char *pgm, char **env, int *status)
 		pid = fork();
 
 		if (pid == 0)
-			execve(full_path, args, env);
+			execve(full_path, args, *env);
 
 		wait(&st);
 		free(full_path);
