@@ -7,15 +7,43 @@
  *
  */
 
-void check_exit(char **args, int *run, int *status)
+int check_exit(char **args, int *run, int *status)
 {
 	if (strcmp(args[0], "exit") == 0)
 	{
 		if (args[1])
-			*status = atoi(args[1]);
+			*status = _atoi(args[1]);
 		else if (isatty(STDIN_FILENO))
 			*status = 0;
 
 		*run = 0;
+
+		return (1);
 	}
+
+	return (0);
+}
+
+/**
+ * _atoi - convert string to int
+ * @str: input str
+ *
+ * Return: int corresponding to string
+ */
+int _atoi(char *str)
+{
+	int i = 0;
+	int out = 0;
+	int sign = 1;
+
+	while (str[i] != '\0')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		if (str[i] >= '0' && str[i] <= '9')
+			out = 10 * out + (str[i] - '0');
+		i++;
+	}
+
+	return (sign * out);
 }
