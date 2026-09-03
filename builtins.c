@@ -43,9 +43,15 @@ int _cd(char **args, char ***env_addr)
 	char **env = *env_addr;
 	struct stat st;
 	char *tar = NULL;
+	char old_pwd[1024];
+	char pwd[1024];
+	char *new_args[3];
 
-	if (!args[1] || strcmp(args[1], "-") == 0)
+	if (!args[1])
 		tar = fetch_env("HOME", env);
+
+	else if (strcmp(args[1], "-") == 0)
+		tar = fetch_env("OLDPWD", env);
 
 	else
 		tar = args[1];
@@ -58,11 +64,24 @@ int _cd(char **args, char ***env_addr)
 
 	if (stat(tar, &st) == 0 && S_ISDIR(st.st_mode))
 	{
+		getcwd(old_pwd, 1024);
 		if (chdir(tar) == 0)
+		{
+			new_args[0] = "setenv";
+			new_args[1] = "PWD";
+			getcwd(pwd, 1024);
+			new_args[2] = pwd;
+			_setenv(new_args, env_addr);
+			new_args[1] = "OLDPWD";
+			new_args[2] = old_pwd;
+			_setenv(new_args, env_addr);
 			return (1);
-	}
+		}
 		printf("Path does not exist\n");
 		return (0);
+	}
+
+	return (0);
 }
 
 /**
