@@ -107,7 +107,7 @@ int _setenv(char **args, char **env)
 	if (!name)
 		return (0);
 	if (!val)
-		val = "";
+		return (0);
 
 	while (env[i])
 	{
@@ -126,16 +126,8 @@ int _setenv(char **args, char **env)
 		}
 		i++;
 	}
-	new = malloc(strlen(name) + strlen(val) + 2);
-	if (!new)
-		return (0);
 
-	sprintf(new, "%s=%s", name, val);
-
-	env[i] = new;
-	env[i + 1] = NULL;
-
-	return (1);
+	return (0);
 }
 
 /**
