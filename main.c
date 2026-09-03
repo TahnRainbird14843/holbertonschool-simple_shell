@@ -34,6 +34,14 @@ int main(__attribute__ ((unused)) int argc,
 			prompt();
 
 		input = input_read();
+		if (input[0] == '#' || input[0] == '\0')
+		{
+			free(input);
+			input = strdup("");
+		}
+		else
+			input = strtok(input, "#");
+
 		if (!input)
 		{
 			break;
