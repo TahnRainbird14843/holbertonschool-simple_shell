@@ -57,10 +57,7 @@ int _cd(char **args, char ***env_addr)
 		tar = args[1];
 
 	if (!tar)
-	{
-		printf("HOME\n");
 		return (0);
-	}
 
 	if (stat(tar, &st) == 0 && S_ISDIR(st.st_mode))
 	{
