@@ -102,6 +102,7 @@ int _setenv(char **args, char ***env_addr)
 	char *name = args[1];
 	char *val = args[2];
 	char *new;
+	char **new_env;
 	char **env = *env_addr;
 	int i = 0;
 
@@ -127,10 +128,16 @@ int _setenv(char **args, char ***env_addr)
 		i++;
 	}
 
-	env = realloc(env, sizeof(char *) * (i + 2));
-	env[i] = new;
-	env[i + 1] = NULL;
-	*env_addr = env;
+	new_env = malloc(sizeof(char *) * (i + 2));
+	i = 0;
+	while (env[i])
+	{
+		new_env[i] = env[i];
+		i++;
+	}
+	new_env[i] = new;
+	new_env[i + 1] = NULL;
+	*env_addr = new_env;
 
 	return (0);
 }
