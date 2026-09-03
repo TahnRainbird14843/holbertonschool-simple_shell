@@ -46,18 +46,28 @@ int _cd(char **args, char ***env_addr, char *pgm)
 	char old_pwd[1024];
 	char pwd[1024];
 	char *new_args[3];
+	int to_old = 0;
 
 	if (!args[1])
 		tar = fetch_env("HOME", env);
 
 	else if (strcmp(args[1], "-") == 0)
+	{
+		to_old = 1;
 		tar = fetch_env("OLDPWD", env);
+	}
 
 	else
 		tar = args[1];
 
+	getcwd(old_pwd, 1024);
+
 	if (!tar)
+	{
+		if (to_old)
+			printf("%s\n", old_pwd);
 		return (0);
+	}
 
 	if (stat(tar, &st) == 0 && S_ISDIR(st.st_mode))
 	{
@@ -72,11 +82,18 @@ int _cd(char **args, char ***env_addr, char *pgm)
 			new_args[1] = "OLDPWD";
 			new_args[2] = old_pwd;
 			_setenv(new_args, env_addr, pgm);
+			if (to_old)
+				printf("%s\n", pwd);
 			return (1);
 		}
 		fprintf(stderr, "%s: 1: cd: can't cd to %s\n", pgm, tar);
 		return (0);
 	}
+
+	if (to_old)
+		printf("%s\n", old_pwd);
+	else
+		fprintf(stderr, "%s: 1: cd: can't cd to %s\n", pgm, tar);
 
 	return (0);
 }
