@@ -41,6 +41,6 @@ int _unsetenv(char **args, char **env);
 int get_env_size(char **env);
 char *get_home(char **env);
 char *fetch_env(char *var, char **env);
-int _atoi(char *str);
+int _atoi(char *str, int *fail);
 
 #endif

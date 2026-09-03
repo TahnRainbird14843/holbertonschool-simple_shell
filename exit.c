@@ -10,16 +10,17 @@
 int check_exit(char **args, int *run, int *status, char *pgm)
 {
 	int exit_status;
+	int exit_fail;
 
 	if (strcmp(args[0], "exit") == 0)
 	{
 		if (args[1])
 		{
-			exit_status = _atoi(args[1]);
-			if (exit_status < 0)
+			exit_status = _atoi(args[1], &exit_fail);
+			if (exit_fail == 1)
 			{
 				*status = 2;
-				fprintf(stderr, "%s: 1: exit: Illegal number: %d\n", pgm, exit_status);
+				fprintf(stderr, "%s: 1: exit: Illegal number: %s\n", pgm, args[1]);
 				return (-1);
 			}
 
@@ -42,20 +43,20 @@ int check_exit(char **args, int *run, int *status, char *pgm)
  *
  * Return: int corresponding to string
  */
-int _atoi(char *str)
+int _atoi(char *str, int *fail)
 {
 	int i = 0;
 	int out = 0;
-	int sign = 1;
 
+	*fail = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '-')
-			sign *= -1;
 		if (str[i] >= '0' && str[i] <= '9')
 			out = 10 * out + (str[i] - '0');
+		else
+			*fail = 1;
 		i++;
 	}
 
-	return (sign * out);
+	return (out);
 }
