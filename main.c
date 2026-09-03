@@ -42,8 +42,8 @@ int main(__attribute__ ((unused)) int argc,
 
 		if (args && args[0])
 		{
-			check_exit(args, &run, &status);
-			if (run == 1)
+			if (check_exit(args, &run, &status));
+			else if (run == 1)
 				execute(args, argv[0], envir, &status);
 		}
 

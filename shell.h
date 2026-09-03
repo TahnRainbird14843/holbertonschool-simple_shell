@@ -32,7 +32,7 @@ char *_strtok(char *input, char *sep);
 char *get_path(char *command, char **env);
 int execute(char **args, char *pgm, char **env, int *status);
 int (*get_builtin(char *cmd))(char **, char **);
-void check_exit(char **args, int *run, int *status);
+int check_exit(char **args, int *run, int *status);
 void sig_handle(int);
 int _cd(char **args, char **env);
 int _env(char **args, char **env);
@@ -41,5 +41,6 @@ int _unsetenv(char **args, char **env);
 int get_env_size(char **env);
 char *get_home(char **env);
 char *fetch_env(char *var, char **env);
+int _atoi(char *str);
 
 #endif
