@@ -7,12 +7,24 @@
  *
  */
 
-int check_exit(char **args, int *run, int *status)
+int check_exit(char **args, int *run, int *status, char *pgm)
 {
+	int exit_status;
+
 	if (strcmp(args[0], "exit") == 0)
 	{
 		if (args[1])
-			*status = _atoi(args[1]);
+		{
+			exit_status = _atoi(args[1]);
+			if (exit_status < 0)
+			{
+				*status = 2;
+				fprintf(stderr, "%s: 1: exit: Illegal number: %d\n", pgm, exit_status);
+				return (-1);
+			}
+
+			*status = exit_status;
+		}
 		else if (isatty(STDIN_FILENO))
 			*status = 0;
 

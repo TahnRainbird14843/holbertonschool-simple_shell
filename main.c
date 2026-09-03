@@ -19,6 +19,7 @@ int main(__attribute__ ((unused)) int argc,
 	int i = 0;
 	int run = 1;
 	int status = 0;
+	int ex;
 
 	while (env[i])
 	{
@@ -42,8 +43,8 @@ int main(__attribute__ ((unused)) int argc,
 
 		if (args && args[0])
 		{
-			if (check_exit(args, &run, &status));
-			else if (run == 1)
+			ex = check_exit(args, &run, &status, argv[0]);
+			if (ex == 0)
 				execute(args, argv[0], envir, &status);
 		}
 
