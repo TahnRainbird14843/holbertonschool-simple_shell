@@ -7,21 +7,15 @@
  *
  */
 
-void check_exit(char **args, int last_status)
+void check_exit(char **args, int *run, int *status)
 {
-	int exit_code;
-
 	if (strcmp(args[0], "exit") == 0)
 	{
 		if (args[1])
-		{
-			exit_code = atoi(args[1]);
-			exit(exit_code);
-		}
+			*status = atoi(args[1]);
+		else if (isatty(STDIN_FILENO))
+			*status = 0;
 
-		else
-		{
-			exit(last_status);
-		}
+		*run = 0;
 	}
 }

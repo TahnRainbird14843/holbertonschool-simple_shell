@@ -10,14 +10,15 @@
  */
 
 int main(__attribute__ ((unused)) int argc,
-		__attribute__ ((unused)) char *argv[],
+		char *argv[],
 		char *env[])
 {
 	char *input, **args;
 	int size = get_env_size(env);
 	char **envir = malloc(sizeof(char *) * size);
 	int i = 0;
-	int last_status = 0;
+	int run = 1;
+	int status = 0;
 
 	while (env[i])
 	{
@@ -26,29 +27,30 @@ int main(__attribute__ ((unused)) int argc,
 	}
 	envir[i] = NULL;
 
-	while (1)
+	while (run)
 	{
 		if (isatty(STDIN_FILENO))
 			prompt();
 
 		input = input_read();
 		if (!input)
-			break;
-
-		args = get_tokens(input);
-		if (!args || !args[0])
 		{
-			free(input);
-			free(args);
-			continue;
+			break;
 		}
 
-		check_exit(args, last_status);
-		last_status = execute(args, envir);
-		
-			free(input);
-			free(args);
+		args = get_tokens(input);
 
+		if (args && args[0])
+		{
+			check_exit(args, &run, &status);
+			if (run == 1)
+				execute(args, argv[0], envir, &status);
+		}
+
+		free(input);
+		free(args);
+		input = NULL;
+		args = NULL;
 	}
 	i = 0;
 	while (envir[i])
@@ -57,6 +59,9 @@ int main(__attribute__ ((unused)) int argc,
 		i++;
 	}
 	free(envir);
+
+	if (status)
+		exit(status);
 
 	return (0);
 }
