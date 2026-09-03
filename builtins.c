@@ -68,10 +68,10 @@ int _cd(char **args, char ***env_addr, char *pgm)
 			new_args[1] = "PWD";
 			getcwd(pwd, 1024);
 			new_args[2] = pwd;
-			_setenv(new_args, env_addr);
+			_setenv(new_args, env_addr, pgm);
 			new_args[1] = "OLDPWD";
 			new_args[2] = old_pwd;
-			_setenv(new_args, env_addr);
+			_setenv(new_args, env_addr, pgm);
 			return (1);
 		}
 		fprintf(stderr, "%s: 1: cd: can't cd to %s\n", pgm, tar);
