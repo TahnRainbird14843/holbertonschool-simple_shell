@@ -58,34 +58,32 @@ ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size, FILE *strea
 
 char *_strtok(char *input, char *sep)
 {
-	int i = 0;
-	static char tok[64];
-	static char copy[128];
+	static char *copy;
 	static int j = 0;
+	static int tok = 0;
 
 
 	if (input != NULL)
 	{
-		strcpy(copy, input);
+		copy = input;
 		j = 0;
 	}
+	tok = j;
 
 	if (copy[j] == '\0')
 		return (NULL);
 
-	while (copy[j] == sep[0])
-		j++;
-
 	while (copy[j] != '\0' && copy[j] != sep[0])
-	{
-		tok[i++] = copy[j++];
-	}
-	tok[i] = '\0';
+		j++;
 
 	if (copy[j] == sep[0])
+	{
+		copy[j] = '\0';
 		j++;
+		return (copy + tok);
+	}
 
-	return (tok);
+	return (copy + tok);
 }
 
 /**
