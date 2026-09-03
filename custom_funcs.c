@@ -59,23 +59,20 @@ ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size, FILE *strea
 char *_strtok(char *input, char *sep)
 {
 	int i = 0;
-	char *tok;
-	static char *copy;
+	static char tok[64];
+	static char copy[128];
 	static int j = 0;
 
 
 	if (input != NULL)
 	{
-		copy = input;
+		strcpy(copy, input);
 		j = 0;
 	}
-	if (!copy || copy[j] == '\0')
+
+	if (copy[j] == '\0')
 		return (NULL);
-	
-	tok = malloc(64);
-	if (!tok)
-		return (NULL);
-	
+
 	while (copy[j] == sep[0])
 		j++;
 
@@ -90,8 +87,6 @@ char *_strtok(char *input, char *sep)
 
 	return (tok);
 }
-
-/* getenv function*/
 
 /**
  * Fetch_env - gets value of environment variable
