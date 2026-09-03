@@ -64,36 +64,29 @@ char *_strtok(char *input, char *sep)
 	static int j = 0;
 
 
-	if (input)
+	if (input != NULL)
 	{
-		free(copy);
-		copy = strdup(input);
+		copy = input;
 		j = 0;
 	}
-	if (!copy)
+	if (!copy || copy[j] == '\0')
 		return (NULL);
 	
 	tok = malloc(64);
 	if (!tok)
 		return (NULL);
 	
+	while (copy[j] == sep[0])
+		j++;
+
 	while (copy[j] != '\0' && copy[j] != sep[0])
 	{
-		tok[i] = copy[j];
-		i++, j++;
+		tok[i++] = copy[j++];
 	}
 	tok[i] = '\0';
 
-	if (copy[j] == '\0')
-	{
-		free(copy);
-		copy = NULL;
-		j = 0;
-	}
-	else
-	{
+	if (copy[j] == sep[0])
 		j++;
-	}
 
 	return (tok);
 }
