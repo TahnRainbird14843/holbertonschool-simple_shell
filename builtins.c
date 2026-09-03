@@ -7,7 +7,7 @@
  * Return: pointer to function executes command otherwise NULL
  */
 
-int (*get_builtin(char *cmd))(char **, char ***)
+int (*get_builtin(char *cmd))(char **, char ***, char *)
 {
 	cmd_t cmds[] = {
 		{"cd", _cd},
@@ -38,7 +38,7 @@ int (*get_builtin(char *cmd))(char **, char ***)
  * Return: 1 - success otherwise 0
  */
 
-int _cd(char **args, char ***env_addr)
+int _cd(char **args, char ***env_addr, char *pgm)
 {
 	char **env = *env_addr;
 	struct stat st;
@@ -74,7 +74,7 @@ int _cd(char **args, char ***env_addr)
 			_setenv(new_args, env_addr);
 			return (1);
 		}
-		printf("Path does not exist\n");
+		fprintf(stderr, "%s: 1: cd: can't cd to %s\n", pgm, tar);
 		return (0);
 	}
 
@@ -89,7 +89,7 @@ int _cd(char **args, char ***env_addr)
  * Return: 1
  */
 
-int _env(char **args, char ***env_addr)
+int _env(char **args, char ***env_addr, __attribute__ ((unused)) char *pgm)
 {
 	char **env = *env_addr;
 	int i = 0;
@@ -113,7 +113,7 @@ int _env(char **args, char ***env_addr)
  * Return: 1 - success otherwise 0
  */
 
-int _setenv(char **args, char ***env_addr)
+int _setenv(char **args, char ***env_addr, __attribute__ ((unused)) char *pgm)
 {
 	char *name = args[1];
 	char *val = args[2];
@@ -167,7 +167,7 @@ int _setenv(char **args, char ***env_addr)
  * Return: 1 - success otherwise 0.
  */
 
-int _unsetenv(char **args, char ***env_addr)
+int _unsetenv(char **args, char ***env_addr, __attribute__ ((unused)) char *pgm)
 {
 	char *name;
 	char **env = *env_addr;

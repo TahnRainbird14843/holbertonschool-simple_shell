@@ -13,7 +13,7 @@ int execute(char **args, char *pgm, char ***env, int *status)
 	char *full_path;
 	int st;
 	pid_t pid;
-	int (*builtin)(char **, char ***);
+	int (*builtin)(char **, char ***, char *);
 
 	if (!args[0] || args[0][0] == '\0')
 		return (0);
@@ -25,7 +25,7 @@ int execute(char **args, char *pgm, char ***env, int *status)
 	{
 		if (full_path)
 			free(full_path);
-		builtin(args, env);
+		builtin(args, env, pgm);
 	}
 	else if (full_path)
 	{
