@@ -15,7 +15,7 @@ int main(__attribute__ ((unused)) int argc,
 {
 	char *input, **args;
 	int size = get_env_size(env);
-	char **envir = malloc(sizeof(char *) * size);
+	char **envir = malloc(sizeof(char *) * (size + 1));
 	int i = 0;
 	int run = 1;
 	int status = 0;
@@ -81,5 +81,5 @@ int get_env_size(char **env)
 	while (env[i] != NULL)
 		i++;
 
-	return (i + 1);
+	return (i);
 }
