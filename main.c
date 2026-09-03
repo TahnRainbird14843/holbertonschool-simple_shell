@@ -46,7 +46,7 @@ int main(__attribute__ ((unused)) int argc,
 		{
 			ex = check_exit(args, &run, &status, argv[0]);
 			if (ex == 0)
-				execute(args, argv[0], envir, &status);
+				execute(args, argv[0], &envir, &status);
 		}
 
 		free(input);

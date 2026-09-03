@@ -7,7 +7,7 @@
  * Return: pointer to function executes command otherwise NULL
  */
 
-int (*get_builtin(char *cmd))(char **, char **)
+int (*get_builtin(char *cmd))(char **, char ***)
 {
 	cmd_t cmds[] = {
 		{"cd", _cd},
@@ -38,9 +38,9 @@ int (*get_builtin(char *cmd))(char **, char **)
  * Return: 1 - success otherwise 0
  */
 
-int _cd(char **args, char **env)
+int _cd(char **args, char ***env_addr)
 {
-
+	char **env = *env_addr;
 	struct stat st;
 	char *tar = NULL;
 
@@ -73,9 +73,9 @@ int _cd(char **args, char **env)
  * Return: 1
  */
 
-int _env(char **args, char **env)
+int _env(char **args, char ***env_addr)
 {
-
+	char **env = *env_addr;
 	int i = 0;
 
 	(void)args; /*unused*/
@@ -97,11 +97,12 @@ int _env(char **args, char **env)
  * Return: 1 - success otherwise 0
  */
 
-int _setenv(char **args, char **env)
+int _setenv(char **args, char ***env_addr)
 {
 	char *name = args[1];
 	char *val = args[2];
 	char *new;
+	char **env = *env_addr;
 	int i = 0;
 
 	if (!name)
@@ -109,23 +110,27 @@ int _setenv(char **args, char **env)
 	if (!val)
 		return (0);
 
+	new = malloc(strlen(name) + strlen(val) + 2);
+	if (!new)
+		return (0);
+	sprintf(new, "%s=%s", name, val);
+
 	while (env[i])
 	{
 		if (strncmp(env[i], name, strlen(name)) == 0 &&
 			env[i][strlen(name)] == '=')
 		{
 			free(env[i]);
-
-			new = malloc(strlen(name) + strlen(val) + 2);
-			if (!new)
-				return (0);
-
-			sprintf(new, "%s=%s", name, val);
 			env[i] = new;
 			return (1);
 		}
 		i++;
 	}
+
+	env = realloc(env, sizeof(char *) * (i + 2));
+	env[i] = new;
+	env[i + 1] = NULL;
+	*env_addr = env;
 
 	return (0);
 }
@@ -138,9 +143,10 @@ int _setenv(char **args, char **env)
  * Return: 1 - success otherwise 0.
  */
 
-int _unsetenv(char **args, char **env)
+int _unsetenv(char **args, char ***env_addr)
 {
 	char *name;
+	char **env = *env_addr;
 	int i = 0, j;
 
 	if (!args[1])
