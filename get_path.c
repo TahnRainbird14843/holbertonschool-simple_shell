@@ -14,7 +14,7 @@ char *get_path(char *command, char **env)
 	char *path = fetch_env("PATH", env);
 
 	if (access(command, X_OK) == 0 && (command[0] == '/' || command[0] == '.'))
-		return (strdup(command));
+		return (_strdup(command));
 
 	if (!path || path[0] == '\0')
 		return (NULL);
