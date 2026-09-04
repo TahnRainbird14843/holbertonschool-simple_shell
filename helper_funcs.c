@@ -6,7 +6,7 @@ char *_strdup(char *str)
 	int size;
 	int i = 0;
 
-	size = strlen(str);
+	size = _strlen(str);
 	out = malloc(size + 1);
 	while (str[i] != '\0')
 	{
