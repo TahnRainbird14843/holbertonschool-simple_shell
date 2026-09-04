@@ -60,4 +60,12 @@ int _strlen(char *str)
 	return (i);
 }
 
-void *_realloc(void *input, size_t size);
+void *_realloc(void *input, size_t size)
+{
+	void *out = malloc(size);
+
+	out = memcpy(out, input, size > sizeof(input) ? sizeof(input) : size);
+	free(input);
+	
+	return (out);
+}
