@@ -93,19 +93,23 @@ int _strlen(char *str)
  *
  * Return: pointer to newly allocated memory of new size
  */
-void *_realloc(void *input, size_t size)
+void *_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	char *out = malloc(size);
-	char *in = (char *)input;
-	int i = 0;
-	int s = size > sizeof(input) ? sizeof(input) : size;
+	char *n_ptr, *o_ptr;
+	size_t i;
 
-	while (i < s)
-	{
-		out[i] = in[i];
-		i++;
-	}
-	free(input);
+	if (ptr == NULL)
+		return malloc(new_size);
 
-	return ((void *)out);
+	n_ptr = malloc(new_size);
+	if (n_ptr == NULL)
+		return (NULL);
+
+	o_ptr = (char *)ptr;
+
+	for (i = 0; i < (old_size < new_size ? old_size : new_size); i++)
+		n_ptr[i] = o_ptr[i];
+	
+	free(ptr);
+	return (n_ptr);
 }
