@@ -49,7 +49,7 @@ ssize_t _getline(char **input, __attribute__ ((unused)) size_t *size,
 		else if (count == input_size)
 		{
 			input_size *= 2;
-			*input = _realloc(*input, input_size);
+			*input = _realloc(*input, input_size, input_size * 2);
 			if (!*input)
 				return (-1);
 		}
@@ -88,6 +88,7 @@ char *_strtok(char *input, char *sep)
 		i = 0;
 		while (sep[i] != '\0' && copy[j] != sep[i])
 			i++;
+
 		if (sep[i] == '\0')
 			break;
 		j++;
