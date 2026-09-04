@@ -68,6 +68,7 @@ char *_strtok(char *input, char *sep)
 	static char *copy;
 	static int j = 0;
 	static int tok = 0;
+	int i = 0;
 
 
 	if (input != NULL)
@@ -80,10 +81,17 @@ char *_strtok(char *input, char *sep)
 	if (copy[j] == '\0')
 		return (NULL);
 
-	while (copy[j] != '\0' && copy[j] != sep[0])
+	while (copy[j] != '\0')
+	{
+		i = 0;
+		while (copy[j] != sep[i] && sep[i] != '\0')
+			i++;
+		if (copy[j] == sep[i])
+			break;
 		j++;
+	}
 
-	if (copy[j] == sep[0])
+	if (copy[j] == sep[i])
 	{
 		copy[j] = '\0';
 		j++;
