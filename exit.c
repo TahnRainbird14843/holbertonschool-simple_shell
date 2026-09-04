@@ -12,7 +12,7 @@ int check_exit(char **args, int *run, int *status, char *pgm)
 	int exit_status;
 	int exit_fail;
 
-	if (strcmp(args[0], "exit") == 0)
+	if (_strcmp(args[0], "exit") == 0)
 	{
 		if (args[1])
 		{

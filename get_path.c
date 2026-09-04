@@ -19,7 +19,7 @@ char *get_path(char *command, char **env)
 	if (!path || path[0] == '\0')
 		return (NULL);
 
-	p_copy = strdup(path);
+	p_copy = _strdup(path);
 	if (!p_copy)
 		return (NULL);
 
@@ -35,7 +35,7 @@ char *get_path(char *command, char **env)
 		if (access(full_path, X_OK) == 0)
 		{
 			free(p_copy);
-			return(strdup(full_path));
+			return(_strdup(full_path));
 		}
 		dire = _strtok(NULL, ":");
 	}

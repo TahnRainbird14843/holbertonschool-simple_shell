@@ -22,7 +22,7 @@ int (*get_builtin(char *cmd))(char **, char ***, char *)
 
 	while (cmds[i].cmd)
 	{
-		if (strcmp(cmds[i].cmd, cmd) == 0)
+		if (_strcmp(cmds[i].cmd, cmd) == 0)
 			return (cmds[i].func);
 		i++;
 	}
@@ -51,7 +51,7 @@ int _cd(char **args, char ***env_addr, char *pgm)
 	if (!args[1])
 		tar = fetch_env("HOME", env);
 
-	else if (strcmp(args[1], "-") == 0)
+	else if (_strcmp(args[1], "-") == 0)
 	{
 		to_old = 1;
 		tar = fetch_env("OLDPWD", env);
@@ -144,14 +144,14 @@ int _setenv(char **args, char ***env_addr, __attribute__ ((unused)) char *pgm)
 	if (!val)
 		return (0);
 
-	new = malloc(strlen(name) + strlen(val) + 2);
+	new = malloc(_strlen(name) + _strlen(val) + 2);
 	if (!new)
 		return (0);
 	sprintf(new, "%s=%s", name, val);
 
 	while (env[i])
 	{
-		if (strncmp(env[i], name, strlen(name)) == 0 &&
+		if (_strncmp(env[i], name, _strlen(name)) == 0 &&
 			env[i][strlen(name)] == '=')
 		{
 			free(env[i]);
@@ -197,8 +197,8 @@ int _unsetenv(char **args, char ***env_addr, __attribute__ ((unused)) char *pgm)
 
 	while (env[i])
 	{
-		if (strncmp(env[i], name, strlen(name)) == 0 &&
-			env[i][strlen(name)] == '=')
+		if (_strncmp(env[i], name, _strlen(name)) == 0 &&
+			env[i][_strlen(name)] == '=')
 		{
 
 			free(env[i]);

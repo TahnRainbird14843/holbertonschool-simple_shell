@@ -42,5 +42,10 @@ int get_env_size(char **env);
 char *get_home(char **env);
 char *fetch_env(char *var, char **env);
 int _atoi(char *str, int *fail);
+char *_strdup(char *str);
+int _strncmp(char *str1, char *str2, int n);
+int _strcmp(char *str1, char *str2);
+int _strlen(char *str);
+void *_realloc(void *input, size_t size);
 
 #endif

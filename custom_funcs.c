@@ -9,7 +9,7 @@
  * Return: Pointer to buffer otherwise NULL
  */
 
-ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size, FILE *stream)
+ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size,__attribute__ ((unused)) FILE *stream)
 {
 	static char buffer[1024];
 	static ssize_t buff_len = 0, buff = 0;
@@ -31,7 +31,7 @@ ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size, FILE *strea
 	{
 		if (buff >= buff_len)
 		{
-			buff_len = read(fileno(stream), buffer, 1024);
+			buff_len = read(0, buffer, 1024);
 			buff = 0;
 
 			if (buff_len <= 0)
@@ -96,11 +96,11 @@ char *_strtok(char *input, char *sep)
 char *fetch_env(char *var, char **env)
 {
 	int i = 0;
-	int l = strlen(var);
+	int l = _strlen(var);
 
 	while (env[i])
 	{
-		if (strncmp(env[i], var, l) == 0 &&
+		if (_strncmp(env[i], var, l) == 0 &&
 				env[i][l] == '=')
 		{
 			return (env[i] + l + 1);
