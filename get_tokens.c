@@ -25,7 +25,7 @@ char **get_tokens(char *input)
 		if (i >= buffsize)
 		{
 			buffsize *= 2;
-			tokens = realloc(tokens, sizeof(char *) * buffsize);
+			tokens = _realloc(tokens, sizeof(char *) * buffsize);
 
 			if (!tokens)
 				return (NULL);
