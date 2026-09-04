@@ -46,7 +46,7 @@ ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size,__attribute_
 		else if (count == input_size)
 		{
 			input_size *= 2;
-			*input = realloc(*input, input_size);
+			*input = _realloc(*input, input_size);
 			if (!*input)
 				return (-1);
 		}
