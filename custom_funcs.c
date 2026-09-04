@@ -65,9 +65,9 @@ ssize_t _getline(char **input, __attribute__ ((unused)) size_t *size,
 char *_strtok(char *input, char *sep)
 {
 	static char *copy;
-	static int j;
-	static int tok;
+	static int j = 0;
 	int i = 0;
+	int tok;
 
 
 	if (input != NULL)
@@ -76,31 +76,43 @@ char *_strtok(char *input, char *sep)
 		j = 0;
 	}
 
-	tok = j;
-
-	if (copy[j] == '\0')
+	if (!copy || copy[j] == '\0')
 		return (NULL);
 
 	while (copy[j] != '\0')
 	{
 		i = 0;
-		while (copy[j] != sep[i] && sep[i] != '\0')
+		while (sep[i] != '\0' && copy[j] == sep[i])
 			i++;
-		if (copy[j] == sep[i])
+		if (sep[i] == '\0')
 			break;
 		j++;
 	}
 
-	if (copy[j] == sep[i])
+	if (copy[j] == '\0')
+		return (NULL);
+
+	tok = j;
+
+	while (copy[j] != '\0')
+	{
+		i = 0;
+		while (sep[i] != '\0' && copy[j] != sep[i])
+			i++;
+
+		if (sep[i] != '\0')
+			break;
+
+		j++;
+	}
+	if (copy[j] != '\0')
 	{
 		copy[j] = '\0';
 		j++;
-		return (copy + tok);
 	}
 
 	return (copy + tok);
 }
-
 /**
  * fetch_env - gets value of environment variable
  * @var: name of environment var

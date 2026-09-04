@@ -21,6 +21,8 @@ int main(__attribute__ ((unused)) int argc,
 	int status = 0;
 	int ex;
 
+        print_shell_icon();
+
 	while (env[i])
 	{
 		envir[i] = _strdup(env[i]);

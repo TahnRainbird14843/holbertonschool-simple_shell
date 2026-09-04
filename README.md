@@ -1,4 +1,4 @@
-<img src="https://holbertonschool.com.au/wp-content/uploads/2023/02/Holberton-School.png">
+[<img src="https://holbertonschool.com.au/wp-content/uploads/2023/02/Holberton-School.png">](https://holbertonschool.com.au/)
 
 # C - Simple Shell 🐚                 
 This project is an implementation of a simple UNIX command interpreter, created as part of the Holberton School curriculum. 
@@ -36,8 +36,8 @@ The following files are included in this project:
 | [get\_tokens.c](./get_tokens.c)               | Splits input lines into tokens for command execution                                              |
 | [input\_read.c](./input_read.c)               | Reads user input from standard output and manages buffer allocation                                              |
 | [builtins.c](./builtin.c)                     | Implements builtin commands (env, cd and exit)                                              |
-| [custom\_funcs.c](./custom_funcs.c)           | Defines helper functions in multiple source files                                              |
-
+| [custom\_funcs.c](./custom_funcs.c)           | Implement shell's custom getline, token and encironment fetch functions |
+| [helper\_funcs.c](./helper_funcs.c)         | Proves small custom string & memort helpers used by shell |
 ## Compile ⚙️
 
 Compile program with:
