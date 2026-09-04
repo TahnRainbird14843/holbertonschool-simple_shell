@@ -12,7 +12,7 @@
 ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size,__attribute__ ((unused)) FILE *stream)
 {
 	static char buffer[1024];
-	static ssize_t buff_len = 0, buff = 0;
+	static ssize_t buff_len = 0, buff = 0, input_size = 1024;
 
 	ssize_t count = 0;
 	char c;
@@ -22,7 +22,7 @@ ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size,__attribute_
 
 	if (!(*input))
 	{
-		*input = malloc(1024);
+		*input = malloc(input_size);
 		if (!*input)
 			return (-1);
 	}
@@ -43,6 +43,13 @@ ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size,__attribute_
 
 		if (c == '\n')
 			break;
+		else if (count == input_size)
+		{
+			input_size *= 2;
+			*input = realloc(*input, input_size);
+			if (!*input)
+				return (-1);
+		}
 	}
 	(*input)[count] = '\0';
 	return (count);
