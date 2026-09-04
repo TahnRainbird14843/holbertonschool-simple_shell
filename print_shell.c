@@ -1,4 +1,4 @@
-#include <stdio.h>
+/**#include <stdio.h>
 
 void print_shell_icon(void)
 {
@@ -21,4 +21,4 @@ void print_shell_icon(void)
 	printf("             `--'`._.-'\n");
 	printf(" \n");
 	printf("          -Holberton School shell project by Tahn and Carma-             \n");
-}
+}*/
