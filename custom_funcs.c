@@ -34,7 +34,11 @@ ssize_t _getline(char **input, __attribute__ ((unused)) size_t *size,
 			buff = 0;
 
 			if (buff_len <= 0)
-				return (count > 0 ? count : -1);
+			{
+				if (count > 0)
+					break;
+				return (-1);
+			}
 		}
 
 		c = buffer[buff++];
