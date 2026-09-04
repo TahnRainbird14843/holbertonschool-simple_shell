@@ -3,11 +3,12 @@
 /**
  * execute - command run from forking & calling execve
  * @args: array tokens
+ * @pgm: current program being run
  * @env: environment
+ * @status: current exit status
  *
  * Return: 1 - shell running otherwise 0 - exit
  */
-
 int execute(char **args, char *pgm, char ***env, int *status)
 {
 	char *full_path;
