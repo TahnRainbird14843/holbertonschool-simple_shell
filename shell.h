@@ -47,5 +47,6 @@ int _strncmp(char *str1, char *str2, int n);
 int _strcmp(char *str1, char *str2);
 int _strlen(char *str);
 void *_realloc(void *input, size_t size);
+void print_shell_icon(void);
 
 #endif
