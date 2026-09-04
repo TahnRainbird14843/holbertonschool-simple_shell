@@ -25,14 +25,12 @@ ssize_t _getline(char **input, __attribute__ ((unused)) size_t *size,
 		if (!*input)
 			return (-1);
 	}
-
 	while (1)
 	{
 		if (buff >= buff_len)
 		{
 			buff_len = read(0, buffer, 1024);
 			buff = 0;
-
 			if (buff_len <= 0)
 			{
 				if (count > 0)
@@ -40,16 +38,13 @@ ssize_t _getline(char **input, __attribute__ ((unused)) size_t *size,
 				return (-1);
 			}
 		}
-
 		c = buffer[buff++];
 		(*input)[count++] = c;
-
 		if (c == '\n')
 			break;
 		else if (count == input_size)
 		{
-			*input = _realloc(*input, input_size, input_size * 2);
-			input_size *= 2;
+			*input = _realloc(*input, input_size, input_size = input_size * 2);
 			if (!*input)
 				return (-1);
 		}
@@ -73,41 +68,32 @@ char *_strtok(char *input, char *sep)
 	int i;
 	int tok;
 
-
 	if (input != NULL)
 	{
 		copy = input;
 		j = 0;
 	}
-
 	if (!copy)
 		return (NULL);
-
 	while (copy[j] != '\0')
 	{
 		i = 0;
 		while (sep[i] != '\0' && copy[j] != sep[i])
 			i++;
-
 		if (sep[i] == '\0')
 			break;
 		j++;
 	}
-
 	if (copy[j] == '\0')
 		return (NULL);
-
 	tok = j;
-
 	while (copy[j] != '\0')
 	{
 		i = 0;
 		while (sep[i] != '\0' && copy[j] != sep[i])
 			i++;
-
 		if (sep[i] != '\0')
 			break;
-
 		j++;
 	}
 	if (copy[j] != '\0')
@@ -115,7 +101,6 @@ char *_strtok(char *input, char *sep)
 		copy[j] = '\0';
 		j++;
 	}
-
 	return (copy + tok);
 }
 /**
