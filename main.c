@@ -23,7 +23,7 @@ int main(__attribute__ ((unused)) int argc,
 
 	while (env[i])
 	{
-		envir[i] = strdup(env[i]);
+		envir[i] = _strdup(env[i]);
 		i++;
 	}
 	envir[i] = NULL;
