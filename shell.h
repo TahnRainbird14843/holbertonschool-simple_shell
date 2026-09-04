@@ -47,6 +47,11 @@ int _strncmp(char *str1, char *str2, int n);
 int _strcmp(char *str1, char *str2);
 int _strlen(char *str);
 void *_realloc(void *input, size_t size);
+<<<<<<< HEAD
 void print_shell_icon(void);
+=======
+int change_dir(char *tar, char *pgm, char ***env_addr, int to_old);
+int cleanup(char **env, int status);
+>>>>>>> c2f71a7cd6fc23359e89ea2b47d6a45cc99b778b
 
 #endif

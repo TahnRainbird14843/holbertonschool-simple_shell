@@ -36,33 +36,42 @@ int main(__attribute__ ((unused)) int argc,
 			prompt();
 
 		input = input_read();
-
 		if (!input)
 		{
 			break;
 		}
 
 		args = get_tokens(input);
-
 		if (args && args[0])
 		{
 			ex = check_exit(args, &run, &status, argv[0]);
 			if (ex == 0)
 				execute(args, argv[0], &envir, &status);
 		}
-
 		free(input);
 		free(args);
-		input = NULL;
-		args = NULL;
 	}
-	i = 0;
-	while (envir[i])
+
+	return (cleanup(envir, status));
+}
+
+/**
+ * cleanup - free env and exit with status if needed
+ * @env: current environment
+ * @status: exit status
+ *
+ * Return: 0
+ */
+int cleanup(char **env, int status)
+{
+	int i = 0;
+
+	while (env[i])
 	{
-		free(envir[i]);
+		free(env[i]);
 		i++;
 	}
-	free(envir);
+	free(env);
 
 	if (status)
 		exit(status);

@@ -3,6 +3,7 @@
 /**
  * get_path - directory search in PATH for command
  * @command: name
+ * @env: environment
  *
  * Return: string with full path otherwise NULL
  */
@@ -35,7 +36,7 @@ char *get_path(char *command, char **env)
 		if (access(full_path, X_OK) == 0)
 		{
 			free(p_copy);
-			return(_strdup(full_path));
+			return (_strdup(full_path));
 		}
 		dire = _strtok(NULL, ":");
 	}

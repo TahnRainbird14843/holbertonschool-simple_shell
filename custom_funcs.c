@@ -9,17 +9,16 @@
  * Return: Pointer to buffer otherwise NULL
  */
 
-ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size,__attribute__ ((unused)) FILE *stream)
+ssize_t _getline(char **input, __attribute__ ((unused)) size_t *size,
+		__attribute__ ((unused)) FILE * stream)
 {
 	static char buffer[1024];
 	static ssize_t buff_len = 0, buff = 0, input_size = 1024;
-
 	ssize_t count = 0;
 	char c;
 
 	if (!input)
 		return (-1);
-
 	if (!(*input))
 	{
 		*input = malloc(input_size);
@@ -115,12 +114,12 @@ char *_strtok(char *input, char *sep)
 	return (copy + tok);
 }
 /**
- * Fetch_env - gets value of environment variable
+ * fetch_env - gets value of environment variable
  * @var: name of environment var
+ * @env: environment
  *
  * Return: pointer to val of env var otherwise NULL
  */
-
 char *fetch_env(char *var, char **env)
 {
 	int i = 0;

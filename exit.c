@@ -4,9 +4,11 @@
  * check_exit - handles exit builtin
  * @args: array of cmd arguments
  * @run: pointer to shell loop flag
+ * @status: current exit status
+ * @pgm: current program being run
  *
+ * Return: 1 on succes, 0 on failure
  */
-
 int check_exit(char **args, int *run, int *status, char *pgm)
 {
 	int exit_status;
@@ -40,6 +42,7 @@ int check_exit(char **args, int *run, int *status, char *pgm)
 /**
  * _atoi - convert string to int
  * @str: input str
+ * @fail: set to 0 when non numeric chars are found
  *
  * Return: int corresponding to string
  */
