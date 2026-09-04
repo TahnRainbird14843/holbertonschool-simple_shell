@@ -13,7 +13,7 @@ char *input_read(void)
 	ssize_t l;
 
 	/*signal(SIGINT, sig_handle);*/
-	l = getline(&input, &size, stdin);
+	l = _getline(&input, &size, stdin);
 	if (l == -1)
 	{
 		free(input);
