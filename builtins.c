@@ -152,7 +152,7 @@ int _setenv(char **args, char ***env_addr, __attribute__ ((unused)) char *pgm)
 	while (env[i])
 	{
 		if (_strncmp(env[i], name, _strlen(name)) == 0 &&
-			env[i][strlen(name)] == '=')
+			env[i][_strlen(name)] == '=')
 		{
 			free(env[i]);
 			env[i] = new;
