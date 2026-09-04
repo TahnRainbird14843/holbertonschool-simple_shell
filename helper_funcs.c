@@ -88,8 +88,9 @@ int _strlen(char *str)
 
 /**
  * _realloc - implement realloc from stdlib.h
- * @input: input pointer
- * @size: size to reallocate
+ * @ptr: input pointer
+ * @old_size: size of original pointer
+ * @new_size: size to reallocate
  *
  * Return: pointer to newly allocated memory of new size
  */
@@ -99,7 +100,7 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size)
 	size_t i;
 
 	if (ptr == NULL)
-		return malloc(new_size);
+		return (malloc(new_size));
 
 	n_ptr = malloc(new_size);
 	if (n_ptr == NULL)
@@ -109,7 +110,7 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size)
 
 	for (i = 0; i < (old_size < new_size ? old_size : new_size); i++)
 		n_ptr[i] = o_ptr[i];
-	
+
 	free(ptr);
 	return (n_ptr);
 }

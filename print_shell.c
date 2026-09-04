@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+/**
+ * print_shell_icon - fun icon on startup
+ */
 void print_shell_icon(void)
 {
 	printf("                       ..             000               000 000\n");
@@ -20,5 +23,5 @@ void print_shell_icon(void)
 	printf("             /.''!\"000 /\n");
 	printf("             `--'`._.-'\n");
 	printf(" \n");
-	printf("          -Holberton School shell project by Tahn and Carma-             \n");
+	printf("          -Holberton School shell project by Tahn and Carma-    \n");
 }
