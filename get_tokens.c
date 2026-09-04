@@ -20,7 +20,8 @@ char **get_tokens(char *input)
 	t = _strtok(input, " ");
 	while (t)
 	{
-		tokens[i++] = t;
+		if (t[0] != '\0')
+			tokens[i++] = t;
 
 		if (i >= buffsize)
 		{
