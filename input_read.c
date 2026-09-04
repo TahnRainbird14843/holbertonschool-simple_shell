@@ -28,6 +28,10 @@ char *input_read(void)
 	return (input);
 }
 
+/**
+ * sig_handle - handle SIGINT signal
+ * @sig: recieved signal
+ */
 void sig_handle(__attribute__ ((unused)) int sig)
 {
 	printf("\n");
