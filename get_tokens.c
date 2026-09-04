@@ -17,7 +17,7 @@ char **get_tokens(char *input)
 	if (!tokens)
 		return (NULL);
 
-	t = _strtok(input, " ");
+	t = _strtok(input, " \t\n");
 	while (t)
 	{
 		if (t[0] != '\0')
@@ -32,7 +32,7 @@ char **get_tokens(char *input)
 				return (NULL);
 		}
 
-		t = _strtok(NULL, " ");
+		t = _strtok(NULL, " \t\n");
 	}
 
 	tokens[i] = NULL;
