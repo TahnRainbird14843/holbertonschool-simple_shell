@@ -39,7 +39,7 @@ ssize_t _getline(char **input,__attribute__ ((unused)) size_t *size, FILE *strea
 		}
 
 		c = buffer[buff++];
-		(*input)[count] = c;
+		(*input)[count++] = c;
 
 		if (c == '\n')
 			break;
