@@ -15,7 +15,6 @@ ssize_t _getline(char **input, __attribute__ ((unused)) size_t *size,
 	static char buffer[1024];
 	static ssize_t buff_len = 0, buff = 0, input_size = 1024;
 	ssize_t count = 0;
-	char c;
 
 	if (!input)
 		return (-1);
@@ -38,13 +37,13 @@ ssize_t _getline(char **input, __attribute__ ((unused)) size_t *size,
 				return (-1);
 			}
 		}
-		c = buffer[buff++];
-		(*input)[count++] = c;
+		(*input)[count++] = buffer[buff++];
 		if (c == '\n')
 			break;
 		else if (count == input_size)
 		{
-			*input = _realloc(*input, input_size, input_size = input_size * 2);
+			*input = _realloc(*input, input_size, input_size * 2);
+			input_size *= 2;
 			if (!*input)
 				return (-1);
 		}
