@@ -62,10 +62,17 @@ int _strlen(char *str)
 
 void *_realloc(void *input, size_t size)
 {
-	void *out = malloc(size);
+	char *out = malloc(size);
+	char *in = (char *)input;
+	int i = 0;
+	int s = size > sizeof(input) ? sizeof(input) : size;
 
-	out = memcpy(out, input, size > sizeof(input) ? sizeof(input) : size);
+	while (i < s)
+	{
+		out[i] = in[i];
+		i++;
+	}
 	free(input);
 	
-	return (out);
+	return ((void *)out);
 }
